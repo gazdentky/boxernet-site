@@ -1,0 +1,60 @@
+# サイト基本情報
+title: 株式会社Boxernet
+tagline: IoTで、都市インフラの状態を可視化する。
+description: >-
+  株式会社Boxernetは、各種センサーとHMMアルゴリズムで対象物の状態遷移を
+  検知・推定し、遠隔管理を実現するIoTスタートアップです。
+url: "https://boxernet.online"
+baseurl: ""
+lang: ja
+
+# 会社情報（各ページから参照可能）
+company:
+  name: 株式会社Boxernet
+  name_en: Boxernet Inc.
+  founded: 2023年2月7日
+  capital: 310万円
+  ceo: 高橋 明宏
+  address: 東京都豊島区
+  patent_number: "第7534835号"
+  email: info@boxernet.online
+
+# カラーテーマ
+theme_colors:
+  primary: "#0B5FFF"
+  primary_dark: "#083FA8"
+  accent: "#00C6A9"
+
+# ナビゲーション
+nav:
+  - title: HOME
+    url: /
+  - title: 事業内容
+    url: /business/
+  - title: 会社概要
+    url: /company/
+  - title: お問い合わせ
+    url: /contact/
+
+# ビルド設定
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+timezone: Asia/Tokyo
+
+# 除外
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - Gemfile.production
+  - vendor/
+  - .DS_Store
+  - _preview/
+  - .claude/
+
+# プラグイン（GitHub Pages で利用可能なもの）
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
