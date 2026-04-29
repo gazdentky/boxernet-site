@@ -5,23 +5,104 @@ heading: 事業内容
 description: Boxernetの事業内容。つぶすくん、ピックアップステーション、状態遷移検知プラットフォームをご紹介します。
 permalink: /business/
 hero: true
-lead: 各種センサーとアルゴリズムで、対象物の状態を遠隔管理します。
+lead: 物流・リサイクル・公共空間のIoT機器を、状態遷移で管理する都市インフラOS。
 ---
+
+Boxernetは、物流・リサイクル・公共空間に置かれるIoT機器の状態を、**予約・占有・満杯・異常・回収**という"状態遷移"として管理する**都市インフラOS**を作っています。
+
+## 事業の二本柱
 
 <div class="card-grid" markdown="0">
   <div class="card">
-    <h3>つぶすくん</h3>
-    <p>PET専用スマートリサイクルボックス。自動販売機横に設置するPETボトル回収ボックスで、投入・蓄積の状態遷移をセンサーで検知し、最適な回収タイミングを遠隔から判断します。</p>
+    <h3>予約できるピックアップステーション</h3>
+    <p>再配達・ラストワンマイルの非効率を解消する<strong>都市型インフラ</strong>。EC・配送事業者と連携し、駅前・商業施設・マンションエントランスなどに設置。予約 → 格納 → 受取の状態遷移をクラウドが管理します。</p>
   </div>
   <div class="card">
-    <h3>ピックアップステーション</h3>
-    <p>配送・受取拠点の利用状況をリアルタイム可視化。扉の開閉や荷物の出し入れといった状態変化を捉え、稼働率向上と運用コスト削減を実現します。</p>
-  </div>
-  <div class="card">
-    <h3>状態遷移検知プラットフォーム</h3>
-    <p>各種センサー × HMM などのアルゴリズムによる状態推定エンジン。スマートゴミ箱・コインパーキングなど、様々な対象物の遠隔管理に適用可能な共通基盤を提供します。</p>
+    <h3>スマートリサイクルボックス（つぶすくん）</h3>
+    <p>自販機横・公共空間の回収オペレーションをIoT化する<strong>都市資源循環インフラ</strong>。PETボトル等の投入・圧縮・満杯・回収を状態遷移として検知し、回収頻度の最適化と溢れ事故の予防を同時に実現します。</p>
   </div>
 </div>
+
+## 共通基盤
+
+両事業を支えるのは、Boxernetが独自開発する状態遷移マネジメントの共通基盤です。
+
+**MQTT ／ センサー ／ 予約 ／ 通知 ／ 状態遷移 ／ 運用自動化**
+
+軽量プロトコル（MQTT）と多様なセンサーで現場のイベントを取得し、予約・通知・状態遷移エンジン・運用自動化を一気通貫で提供。アプリケーションが変わっても、共通基盤の上に載せ替えるだけで新しい都市インフラサービスを立ち上げられる構造を目指しています。
+
+<style>
+  .biz-demo-wrap{
+    margin:32px 0 8px;
+    border:1px solid var(--color-border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:#fff;
+    box-shadow:var(--shadow);
+  }
+  .biz-demo-frame{
+    width:100%;
+    height:760px;
+    border:0;
+    display:block;
+  }
+  .biz-demo-cta{
+    text-align:center;
+    margin:8px 0 32px;
+  }
+  .biz-demo-cta .btn{
+    background:var(--color-primary);
+    color:#fff !important;
+    padding:10px 24px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    display:inline-block;
+  }
+  .biz-demo-cta .btn:hover{
+    background:var(--color-primary-dark);
+    text-decoration:none;
+  }
+  .biz-demo-note{
+    font-size:12px;
+    color:var(--color-text-sub);
+    margin-top:8px;
+  }
+  @media (max-width:720px){
+    .biz-demo-frame{ height:1200px; }
+  }
+</style>
+
+## つぶすくん インタラクティブデモ
+
+実際の動作イメージを、ブラウザ上で体験いただけます。「▶ デモを開始」ボタンをクリックすると、投入 → 圧縮 → 回収指示 → 満杯シャットダウン → 回収完了までの 6 ステップが順番に再生されます。
+
+<div class="biz-demo-wrap">
+  <iframe class="biz-demo-frame" src="{{ '/assets/demo/tsubusukun-demo.html' | relative_url }}" title="つぶすくん インタラクティブデモ（簡易版）" loading="lazy"></iframe>
+</div>
+<div class="biz-demo-cta">
+  <a href="{{ '/demo/' | relative_url }}" class="btn">フルスクリーンでデモを見る →</a>
+  <div class="biz-demo-note">投資家・パートナー様向けの解説付き専用ページへ移動します。</div>
+</div>
+
+## ピックアップステーション インタラクティブデモ
+
+駅前・商業施設に設置する **予約型スマート受取拠点** の動作イメージです。EC サイトでの購入時にステーションを指定し、配達業者が QR コードで開錠して格納、受取人が QR コードで受け取るまでの 3 ステップを再現します。
+
+<div class="biz-demo-wrap">
+  <iframe class="biz-demo-frame biz-demo-frame--pickup" src="{{ '/assets/demo/pickup-station-demo.html' | relative_url }}" title="ピックアップステーション インタラクティブデモ" loading="lazy"></iframe>
+</div>
+<div class="biz-demo-cta">
+  <div class="biz-demo-note">状態遷移: <strong>EMPTY</strong>（空き）→ <strong>RESERVED</strong>（予約済み）→ <strong>OCCUPIED</strong>（格納中）→ <strong>EMPTY</strong>（空きへ復帰）</div>
+</div>
+
+<style>
+  .biz-demo-frame--pickup{ height:840px; }
+  @media (max-width:720px){
+    .biz-demo-frame--pickup{ height:1320px; }
+  }
+</style>
 
 ## 技術的アプローチ
 

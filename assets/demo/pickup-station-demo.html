@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ピックアップステーション | 予約型スマート受取拠点 デモ</title>
+<style>
+  :root{
+    --c-primary:#0B5FFF;
+    --c-primary-dark:#083FA8;
+    --c-accent:#00C6A9;
+    --c-text:#1a1a1a;
+    --c-text-sub:#555;
+    --c-border:#e5e7eb;
+    --c-bg:#ffffff;
+    --c-bg-alt:#f7f9fc;
+    --c-blue:#0B5FFF;
+    --c-orange:#f59e0b;
+    --c-green:#10b981;
+    --c-purple:#8b5cf6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+    background:var(--c-bg);
+    color:var(--c-text);
+    line-height:1.7;
+    font-size:14px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Hero */
+  .hero{text-align:center;padding:28px 20px 8px;}
+  .logo{font-size:11px;letter-spacing:4px;color:var(--c-primary);text-transform:uppercase;margin-bottom:6px;font-weight:700;}
+  .hero h1{font-size:24px;font-weight:700;margin-bottom:6px;color:var(--c-text);letter-spacing:0.04em;}
+  .hero p{font-size:13px;color:var(--c-text-sub);}
+
+  /* Controls */
+  .controls{text-align:center;padding:0 20px 16px;}
+  .btn-group{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .btn{padding:10px 24px;border-radius:999px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+  .btn-primary{background:var(--c-primary);color:#fff;}
+  .btn-primary:hover{background:var(--c-primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(11,95,255,0.25);}
+  .btn-reset{background:#fff;color:var(--c-text-sub);border:1px solid var(--c-border);}
+  .btn-reset:hover{color:var(--c-primary);border-color:var(--c-primary);}
+  .step-counter{font-size:11px;color:var(--c-text-sub);margin-top:8px;}
+
+  /* Demo wrapper */
+  .demo-wrapper{display:flex;gap:24px;padding:16px 28px;max-width:1040px;margin:0 auto;align-items:flex-start;flex-wrap:wrap;}
+
+  /* Station visual */
+  .station-scene{flex:0 0 320px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .station-frame{
+    position:relative;
+    background:linear-gradient(160deg,#f7f9fc,#eef2ff);
+    border:2px solid var(--c-primary);
+    border-radius:14px;
+    padding:14px 12px 12px;
+    box-shadow:0 6px 24px rgba(11,95,255,0.15);
+  }
+  .station-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+    padding:0 4px;
+  }
+  .station-name{
+    font-size:11px;
+    color:var(--c-primary);
+    font-weight:700;
+    letter-spacing:1px;
+  }
+  .station-status{
+    display:inline-block;
+    font-size:9px;
+    background:#fff;
+    border:1px solid var(--c-border);
+    color:var(--c-text-sub);
+    padding:2px 7px;
+    border-radius:4px;
+  }
+
+  .lockers{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+  }
+  .locker{
+    aspect-ratio:1;
+    background:#fff;
+    border:1.5px solid var(--c-border);
+    border-radius:7px;
+    padding:6px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    align-items:center;
+    transition:all 0.5s;
+    position:relative;
+    overflow:hidden;
+  }
+  .locker-id{
+    font-size:8px;
+    color:#94a3b8;
+    font-weight:700;
+    letter-spacing:0.5px;
+  }
+  .locker-icon{
+    font-size:22px;
+    transition:all 0.4s;
+  }
+  .locker-status{
+    font-size:8px;
+    color:#94a3b8;
+    font-weight:600;
+    text-align:center;
+  }
+  .locker.reserved{border-color:var(--c-blue);background:#eef5ff;box-shadow:0 0 8px rgba(11,95,255,0.2);}
+  .locker.reserved .locker-status{color:var(--c-blue);}
+  .locker.occupied{border-color:var(--c-orange);background:#fffbeb;box-shadow:0 0 8px rgba(245,158,11,0.2);}
+  .locker.occupied .locker-status{color:var(--c-orange);}
+  .locker.picking{border-color:var(--c-green);background:#ecfdf5;box-shadow:0 0 10px rgba(16,185,129,0.3);animation:pulse-green 1.5s infinite;}
+  .locker.picking .locker-status{color:var(--c-green);}
+
+  /* Active locker highlight (the one being demoed) */
+  .locker.active{transform:scale(1.05);z-index:2;}
+
+  /* Door open animation */
+  .locker .door-open{
+    position:absolute;
+    inset:0;
+    background:#fff;
+    transform-origin:left center;
+    transition:transform 0.6s ease;
+    border-radius:7px;
+  }
+  .locker.door-opening .door-open{transform:perspective(120px) rotateY(-75deg);}
+
+  @keyframes pulse-green{
+    0%,100%{box-shadow:0 0 10px rgba(16,185,129,0.3);}
+    50%{box-shadow:0 0 18px rgba(16,185,129,0.5);}
+  }
+
+  /* Phone & SMS */
+  .phone-wrap{display:flex;gap:24px;justify-content:center;align-items:flex-start;margin-top:6px;flex-wrap:wrap;}
+  .phone{
+    width:70px;
+    height:120px;
+    background:#1a1a2e;
+    border-radius:10px;
+    padding:6px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    transition:transform 0.4s,opacity 0.4s;
+    opacity:0.35;
+    transform:scale(0.95);
+  }
+  .phone.active{opacity:1;transform:scale(1);}
+  .phone-screen{
+    flex:1;
+    background:#fff;
+    border-radius:6px;
+    padding:6px 4px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    text-align:center;
+  }
+  .phone-label{
+    font-size:8px;
+    color:var(--c-text-sub);
+    margin-top:4px;
+    text-align:center;
+    font-weight:600;
+  }
+  .phone-icon{font-size:16px;}
+  .phone-text{font-size:7px;color:var(--c-text-sub);line-height:1.3;}
+  .phone-qr{
+    width:32px;
+    height:32px;
+    background:repeating-conic-gradient(#000 0% 25%,#fff 0% 50%) 50% / 6px 6px;
+    border:2px solid #000;
+    border-radius:3px;
+  }
+  .sms-pop{
+    background:var(--c-primary);
+    color:#fff;
+    font-size:6.5px;
+    padding:2px 4px;
+    border-radius:3px;
+    font-weight:700;
+    letter-spacing:0.3px;
+  }
+
+  /* Timeline */
+  .state-timeline{flex:1;min-width:300px;}
+  .tl-title{font-size:10px;letter-spacing:2px;color:var(--c-text-sub);text-transform:uppercase;margin-bottom:14px;font-weight:700;}
+  .state-step{display:flex;gap:12px;position:relative;}
+  .state-step:not(:last-child) .step-line{position:absolute;left:13px;top:30px;width:2px;height:80px;background:var(--c-border);transition:background 0.5s;}
+  .step-line.c-blue{background:var(--c-blue);}
+  .step-line.c-orange{background:var(--c-orange);}
+  .step-line.c-green{background:var(--c-green);}
+
+  .step-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--c-border);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:all 0.4s;background:#fff;margin-top:1px;}
+  .step-dot.a-blue  {border-color:var(--c-blue);box-shadow:0 0 9px rgba(11,95,255,0.3);background:#eef5ff;}
+  .step-dot.a-orange{border-color:var(--c-orange);box-shadow:0 0 9px rgba(245,158,11,0.3);background:#fffbeb;}
+  .step-dot.a-green {border-color:var(--c-green);box-shadow:0 0 9px rgba(16,185,129,0.3);background:#ecfdf5;}
+  .step-dot.done    {border-color:var(--c-green);background:#ecfdf5;}
+
+  .step-content{flex:1;padding-bottom:36px;}
+  .step-name{font-size:13px;font-weight:600;color:#94a3b8;transition:color 0.4s;margin-bottom:4px;}
+  .step-name.on{color:var(--c-text);}
+  .step-desc{font-size:11px;color:var(--c-text-sub);line-height:1.7;}
+  .step-tag{display:inline-block;margin-top:6px;font-size:9px;background:#f1f5f9;color:#94a3b8;padding:3px 8px;border-radius:4px;transition:all 0.4s;font-weight:600;letter-spacing:0.05em;}
+  .step-tag.t-blue  {background:#eef5ff;color:var(--c-blue);border:1px solid var(--c-blue);}
+  .step-tag.t-orange{background:#fffbeb;color:var(--c-orange);border:1px solid var(--c-orange);}
+  .step-tag.t-green {background:#ecfdf5;color:var(--c-green);border:1px solid var(--c-green);}
+
+  /* Dashboard */
+  .dashboard{max-width:1040px;margin:0 auto;padding:0 28px 24px;}
+  .dash-title{font-size:10px;letter-spacing:2px;color:var(--c-text-sub);text-transform:uppercase;margin-bottom:6px;font-weight:700;}
+  .dash-note{font-size:11px;color:#94a3b8;margin-bottom:12px;line-height:1.6;}
+  .dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;}
+  .dash-card{background:#fff;border:1px solid var(--c-border);border-radius:12px;padding:14px 18px;box-shadow:0 4px 14px rgba(0,0,0,0.04);text-align:center;}
+  .dash-label{font-size:9px;color:var(--c-text-sub);letter-spacing:1px;margin-bottom:5px;font-weight:600;}
+  .dash-value{font-size:20px;font-weight:700;color:var(--c-primary);transition:color 0.4s;}
+  .dash-sub{font-size:9px;color:#94a3b8;margin-top:2px;}
+
+  /* Responsive */
+  @media (max-width:720px){
+    .hero h1{font-size:20px;}
+    .demo-wrapper{padding:12px 16px;gap:18px;}
+    .station-scene{flex:0 0 100%;}
+    .state-timeline{min-width:100%;}
+    .dashboard{padding:0 16px 20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo">BOXERNET</div>
+  <h1>ピックアップステーション Smart Pickup Station</h1>
+  <p>駅前・商業施設に設置する、予約型スマート受取拠点</p>
+</div>
+
+<div class="controls">
+  <div class="btn-group">
+    <button class="btn btn-reset" onclick="reset()">↺ リセット</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">▶ デモを開始</button>
+  </div>
+  <div class="step-counter" id="stepCounter">ステップ 0 / 3</div>
+</div>
+
+<div class="demo-wrapper">
+  <div class="station-scene">
+    <div class="station-frame">
+      <div class="station-header">
+        <span class="station-name">PICKUP STATION ・ 渋谷駅前</span>
+        <span class="station-status" id="stationStatus">稼働中</span>
+      </div>
+      <div class="lockers" id="lockers">
+        <div class="locker" data-idx="0"><div class="locker-id">A-1</div><div class="locker-icon">📭</div><div class="locker-status">空き</div><div class="door-open"></div></div>
+        <div class="locker" data-idx="1"><div class="locker-id">A-2</div><div class="locker-icon">📭</div><div class="locker-status">空き</div><div class="door-open"></div></div>
+        <div class="locker" data-idx="2"><div class="locker-id">A-3</div><div class="locker-icon">📭</div><div class="locker-status">空き</div><div class="door-open"></div></div>
+        <div class="locker active" data-idx="3"><div class="locker-id">B-1 ★</div><div class="locker-icon">📭</div><div class="locker-status">空き</div><div class="door-open"></div></div>
+        <div class="locker" data-idx="4"><div class="locker-id">B-2</div><div class="locker-icon">📭</div><div class="locker-status">空き</div><div class="door-open"></div></div>
+        <div class="locker" data-idx="5"><div class="locker-id">B-3</div><div class="locker-icon">📭</div><div class="locker-status">空き</div><div class="door-open"></div></div>
+      </div>
+    </div>
+
+    <div class="phone-wrap">
+      <div class="phone" id="phoneBuyer">
+        <div class="phone-screen" id="phoneBuyerScreen">
+          <div class="phone-icon">🛒</div>
+          <div class="phone-text">EC<br>購入者</div>
+        </div>
+      </div>
+      <div class="phone" id="phoneCourier">
+        <div class="phone-screen" id="phoneCourierScreen">
+          <div class="phone-icon">🚚</div>
+          <div class="phone-text">配達<br>業者</div>
+        </div>
+      </div>
+      <div class="phone" id="phoneReceiver">
+        <div class="phone-screen" id="phoneReceiverScreen">
+          <div class="phone-icon">📱</div>
+          <div class="phone-text">受取人</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px;justify-content:center;font-size:9px;color:#94a3b8;text-align:center;">
+      <span style="width:70px;">EC<br>購入者</span>
+      <span style="width:70px;">配達<br>業者</span>
+      <span style="width:70px;">受取人</span>
+    </div>
+  </div>
+
+  <div class="state-timeline">
+    <div class="tl-title">サービスフロー（状態遷移）</div>
+
+    <div class="state-step">
+      <div><div class="step-dot a-blue" id="dot0">📅</div><div class="step-line" id="ln0"></div></div>
+      <div class="step-content">
+        <div class="step-name on" id="nm0">① 予約・配達指定（RESERVED）</div>
+        <div class="step-desc">利用者がスマホで近隣ステーションの空き状況を確認。EC サイトで購入時に配達先として指定し、対象ボックスを予約。クラウドが配達業者へ配送先と開錠用 QR を発行します。</div>
+        <div class="step-tag t-blue" id="tg0">状態: RESERVED ● 予約完了 / QR 発行</div>
+      </div>
+    </div>
+
+    <div class="state-step">
+      <div><div class="step-dot" id="dot1">📦</div><div class="step-line" id="ln1"></div></div>
+      <div class="step-content">
+        <div class="step-name" id="nm1">② 配達業者が格納（OCCUPIED）</div>
+        <div class="step-desc">配達業者が現地で QR コードをスキャン。指定ボックスの扉が開錠され、荷物を投入して施錠。同時に受取人へ SMS で「格納完了」を通知し、受取用 QR コードを送信します。</div>
+        <div class="step-tag" id="tg1">状態: OCCUPIED ● SMS 送信 / 受取 QR 発行</div>
+      </div>
+    </div>
+
+    <div class="state-step">
+      <div><div class="step-dot" id="dot2">✅</div></div>
+      <div class="step-content">
+        <div class="step-name" id="nm2">③ 受取人が受取（EMPTY）</div>
+        <div class="step-desc">受取人が好きなタイミングでステーションへ。スマホの QR をかざすと扉が開錠、荷物を取り出して扉を閉めると施錠。ボックスは「空き」状態に復帰し、次の予約を受け付けます。</div>
+        <div class="step-tag" id="tg2">状態: EMPTY ● 受取完了 / 次の予約待ち</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="dash-title">事業者向け 運用ダッシュボード</div>
+  <div class="dash-note">Boxernet が事業者（設置オーナー・物流事業者）へ提供する遠隔管理画面のイメージ。一般利用者には表示されません。</div>
+  <div class="dash-grid">
+    <div class="dash-card">
+      <div class="dash-label">空きボックス</div>
+      <div class="dash-value" id="dvAvail">6</div>
+      <div class="dash-sub">/ 6 ボックス</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-label">本日の利用件数</div>
+      <div class="dash-value" id="dvUse">28</div>
+      <div class="dash-sub">前日比 +12%</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-label">平均受取所要時間</div>
+      <div class="dash-value" id="dvTime">7.2h</div>
+      <div class="dash-sub">投入 → 受取</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-label">稼働率（直近7日）</div>
+      <div class="dash-value" id="dvRate">73%</div>
+      <div class="dash-sub">設置エリア最高水準</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var STEPS = 3;
+var cur = -1;
+var ACTIVE_IDX = 3; // The active locker (B-1)
+
+// initial state for non-active lockers (to add visual variety)
+var bgLockers = [
+  { state:'empty'    },  // A-1
+  { state:'reserved' },  // A-2
+  { state:'occupied' },  // A-3
+  { state:'empty'    },  // B-1 (active, will be set by step)
+  { state:'empty'    },  // B-2
+  { state:'occupied' }   // B-3
+];
+
+var cfg = [
+  // step 1: RESERVED (スマホで予約)
+  { state:'reserved', status:'予約発生 ・ QR 発行中',  avail:5, phones:['phoneBuyer'] },
+  // step 2: OCCUPIED (配達し格納)
+  { state:'occupied', status:'格納完了 ・ SMS 送信中', avail:5, phones:['phoneCourier','phoneReceiver'] },
+  // step 3: EMPTY (荷物を受け取る)
+  { state:'empty',    status:'受取完了 ・ 空きに復帰', avail:6, phones:['phoneReceiver'] }
+];
+
+function setLocker(idx, state){
+  var el = document.querySelectorAll('.locker')[idx];
+  if(!el) return;
+  el.classList.remove('reserved','occupied','picking','door-opening');
+  var icon = el.querySelector('.locker-icon');
+  var status = el.querySelector('.locker-status');
+  if(state==='empty'){ icon.textContent='📭'; status.textContent='空き'; }
+  else if(state==='reserved'){ el.classList.add('reserved'); icon.textContent='🕒'; status.textContent='予約済み'; }
+  else if(state==='occupied'){ el.classList.add('occupied'); icon.textContent='📦'; status.textContent='格納中'; }
+  else if(state==='picking'){ el.classList.add('picking'); icon.textContent='📦'; status.textContent='受取中'; }
+}
+
+function setupBackground(){
+  for(var i=0;i<bgLockers.length;i++){
+    if(i===ACTIVE_IDX) continue;
+    setLocker(i, bgLockers[i].state);
+  }
+}
+
+function setPhones(activeIds){
+  var ids = ['phoneBuyer','phoneCourier','phoneReceiver'];
+  ids.forEach(function(id){
+    var el = document.getElementById(id);
+    if(activeIds.indexOf(id)>=0){ el.classList.add('active'); }
+    else { el.classList.remove('active'); }
+  });
+}
+
+function setPhoneScreen(id, html){
+  var el = document.getElementById(id+'Screen');
+  if(el) el.innerHTML = html;
+}
+
+function resetPhoneScreens(){
+  setPhoneScreen('phoneBuyer',  '<div class="phone-icon">🛒</div><div class="phone-text">EC<br>購入者</div>');
+  setPhoneScreen('phoneCourier','<div class="phone-icon">🚚</div><div class="phone-text">配達<br>業者</div>');
+  setPhoneScreen('phoneReceiver','<div class="phone-icon">📱</div><div class="phone-text">受取人</div>');
+}
+
+function openDoor(idx, callback){
+  var el = document.querySelectorAll('.locker')[idx];
+  if(!el) return;
+  el.classList.add('door-opening');
+  setTimeout(function(){
+    if(callback) callback();
+    setTimeout(function(){ el.classList.remove('door-opening'); }, 700);
+  }, 700);
+}
+
+function nextStep(){
+  cur++;
+  if(cur>=STEPS){ reset(); return; }
+  apply(cur);
+}
+
+function apply(idx){
+  var s = cfg[idx];
+
+  document.getElementById('nextBtn').textContent = idx < STEPS-1 ? '▶ 次へ' : '✓ 完了';
+  document.getElementById('stepCounter').textContent = 'ステップ '+(idx+1)+' / '+STEPS;
+  document.getElementById('stationStatus').textContent = s.status;
+
+  // Phone screens per step
+  resetPhoneScreens();
+  if(idx===0){
+    setPhoneScreen('phoneBuyer', '<div class="phone-icon">🛒</div><div class="sms-pop">予約完了</div><div class="phone-text">B-1 を確保</div>');
+  } else if(idx===1){
+    setPhoneScreen('phoneCourier', '<div class="phone-qr"></div><div class="phone-text">配達 QR</div>');
+    setPhoneScreen('phoneReceiver','<div class="sms-pop">SMS 受信</div><div class="phone-qr"></div><div class="phone-text">受取 QR</div>');
+  } else if(idx===2){
+    setPhoneScreen('phoneReceiver','<div class="phone-qr"></div><div class="phone-text">受取 QR<br>を提示</div>');
+  }
+  setPhones(s.phones);
+
+  // Open door animation for steps 2 and 3
+  if(idx===1){
+    openDoor(ACTIVE_IDX, function(){ setLocker(ACTIVE_IDX, 'occupied'); });
+  } else if(idx===2){
+    setLocker(ACTIVE_IDX, 'picking');
+    openDoor(ACTIVE_IDX, function(){ setLocker(ACTIVE_IDX, 'empty'); });
+  } else {
+    setLocker(ACTIVE_IDX, s.state);
+  }
+
+  // Dashboard
+  animateNum('dvAvail', s.avail);
+
+  // Timeline
+  var tagClasses = ['t-blue','t-orange','t-green'];
+  var dotClasses = ['a-blue','a-orange','a-green'];
+  var lineClasses= ['c-blue','c-orange','c-green'];
+  for(var j=0;j<STEPS;j++){
+    var d=document.getElementById('dot'+j);
+    var nm=document.getElementById('nm'+j);
+    var tg=document.getElementById('tg'+j);
+    var ln=document.getElementById('ln'+j);
+    d.className='step-dot'; nm.className='step-name'; tg.className='step-tag';
+    if(ln) ln.className='step-line';
+    if(j<idx){
+      d.classList.add('done');
+      if(ln) ln.classList.add(lineClasses[j]);
+    } else if(j===idx){
+      d.classList.add(dotClasses[j]);
+      nm.classList.add('on');
+      tg.classList.add(tagClasses[j]);
+      if(ln) ln.classList.add(lineClasses[j]);
+    }
+  }
+}
+
+function animateNum(id, target){
+  var el = document.getElementById(id);
+  var prev = parseFloat(el.textContent) || 0;
+  var start = performance.now();
+  (function tick(now){
+    var t = Math.min((now-start)/700, 1);
+    var e = 1-Math.pow(1-t,3);
+    el.textContent = Math.round(prev+(target-prev)*e);
+    if(t<1) requestAnimationFrame(tick);
+  })(start);
+}
+
+function reset(){
+  cur = -1;
+  document.getElementById('nextBtn').textContent = '▶ デモを開始';
+  document.getElementById('stepCounter').textContent = 'ステップ 0 / '+STEPS;
+  document.getElementById('stationStatus').textContent = '稼働中';
+  resetPhoneScreens();
+  setPhones([]);
+  setupBackground();
+  setLocker(ACTIVE_IDX, 'empty');
+  animateNum('dvAvail', 6);
+  for(var j=0;j<STEPS;j++){
+    var d=document.getElementById('dot'+j);
+    var nm=document.getElementById('nm'+j);
+    var tg=document.getElementById('tg'+j);
+    var ln=document.getElementById('ln'+j);
+    d.className='step-dot'+(j===0?' a-blue':'');
+    nm.className='step-name'+(j===0?' on':'');
+    tg.className='step-tag'+(j===0?' t-blue':'');
+    if(ln) ln.className='step-line';
+  }
+}
+
+window.onload=reset;
+</script>
+</body>
+</html>

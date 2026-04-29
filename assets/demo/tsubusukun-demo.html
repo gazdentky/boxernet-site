@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>つぶすくん | スマートリサイクルボックス インタラクティブデモ</title>
+<style>
+  :root{
+    --c-primary:#0B5FFF;
+    --c-primary-dark:#083FA8;
+    --c-accent:#00C6A9;
+    --c-text:#1a1a1a;
+    --c-text-sub:#555;
+    --c-border:#e5e7eb;
+    --c-bg:#ffffff;
+    --c-bg-alt:#f7f9fc;
+    --c-bg-soft:#eef2ff;
+    --c-green:#10b981;
+    --c-purple:#8b5cf6;
+    --c-orange:#f59e0b;
+    --c-red:#ef4444;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif;
+    background:var(--c-bg);
+    color:var(--c-text);
+    line-height:1.7;
+    font-size:14px;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* Hero */
+  .hero{text-align:center;padding:28px 20px 8px;background:var(--c-bg);}
+  .logo{font-size:11px;letter-spacing:4px;color:var(--c-primary);text-transform:uppercase;margin-bottom:6px;font-weight:700;}
+  .hero h1{font-size:24px;font-weight:700;margin-bottom:6px;color:var(--c-text);letter-spacing:0.04em;}
+  .hero p{font-size:13px;color:var(--c-text-sub);}
+
+  /* Controls */
+  .controls{text-align:center;padding:0 20px 16px;}
+  .btn-group{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .btn{padding:10px 24px;border-radius:999px;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;font-family:inherit;}
+  .btn-primary{background:var(--c-primary);color:#fff;}
+  .btn-primary:hover{background:var(--c-primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(11,95,255,0.25);}
+  .btn-reset{background:#fff;color:var(--c-text-sub);border:1px solid var(--c-border);}
+  .btn-reset:hover{color:var(--c-primary);border-color:var(--c-primary);}
+  .step-counter{font-size:11px;color:var(--c-text-sub);margin-top:8px;}
+
+  /* Demo wrapper */
+  .demo-wrapper{display:flex;gap:24px;padding:16px 28px;max-width:1040px;margin:0 auto;align-items:flex-start;flex-wrap:wrap;}
+
+  /* Box scene */
+  .box-scene{flex:0 0 220px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .box-container{position:relative;width:200px;height:240px;}
+  .box-body{position:absolute;bottom:0;width:200px;height:220px;background:linear-gradient(160deg,#f7f9fc,#eef2ff);border-radius:14px;border:2px solid var(--c-primary);box-shadow:0 6px 24px rgba(11,95,255,0.15);transition:all 0.5s;}
+  .box-lid{position:absolute;top:0;width:200px;height:34px;background:var(--c-primary);border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:center;}
+  .box-lid-text{font-size:9px;color:#fff;letter-spacing:2px;font-weight:700;}
+
+  .box-screen{position:absolute;top:46px;left:50%;transform:translateX(-50%);width:152px;height:74px;background:#fff;border-radius:8px;border:1px solid var(--c-border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:inset 0 1px 2px rgba(0,0,0,0.05);}
+  .screen-status{font-size:11px;color:var(--c-green);font-weight:700;letter-spacing:1px;transition:color 0.4s;}
+  .screen-id{font-size:9px;color:#94a3b8;}
+  .screen-bar{width:130px;height:7px;background:#e5e7eb;border-radius:4px;overflow:hidden;}
+  .screen-fill{height:100%;border-radius:4px;background:var(--c-green);transition:width 1.2s ease,background 0.4s;}
+
+  .iot-indicator{position:absolute;top:140px;right:12px;width:10px;height:10px;border-radius:50%;background:var(--c-green);box-shadow:0 0 8px var(--c-green);animation:pulse 2s infinite;transition:background 0.4s,box-shadow 0.4s;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+
+  .compress-ring{position:absolute;top:128px;left:12px;width:32px;height:32px;border-radius:50%;border:2px solid var(--c-purple);opacity:0;transition:opacity 0.4s;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .compress-ring.active{opacity:1;animation:spin 1.5s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+
+  .slots{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;gap:8px;}
+  .slot{width:34px;height:34px;border-radius:7px;border:1px solid var(--c-border);background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;transition:all 0.4s;color:#cbd5e1;}
+  .slot.filled{border-color:var(--c-green);box-shadow:0 0 8px rgba(16,185,129,0.3);background:#ecfdf5;color:var(--c-text);}
+  .slot.compressed{border-color:var(--c-purple);box-shadow:0 0 8px rgba(139,92,246,0.3);background:#f5f3ff;transform:scale(0.87);color:var(--c-purple);}
+  .slot.shutdown{border-color:var(--c-red);background:#fef2f2;color:var(--c-red);font-size:18px;}
+  .slot-label{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-size:9px;color:#94a3b8;white-space:nowrap;transition:color 0.4s;}
+
+  .alert-badge{position:absolute;top:8px;right:8px;background:var(--c-orange);color:#fff;font-size:8px;font-weight:700;padding:3px 7px;border-radius:4px;opacity:0;transition:opacity 0.4s;letter-spacing:0.5px;}
+  .alert-badge.active{opacity:1;animation:blink 1s ease infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.5;}}
+
+  .drop-item{position:absolute;top:-28px;left:50%;transform:translateX(-50%);font-size:22px;opacity:0;transition:all 0.5s ease;pointer-events:none;}
+  .drop-item.falling{top:150px;opacity:1;}
+  .drop-item.landed{top:166px;opacity:0;}
+
+  /* Network lines */
+  .network-line{stroke:#cbd5e1;stroke-width:1;stroke-dasharray:4 4;animation:dash 2s linear infinite;}
+  @keyframes dash{to{stroke-dashoffset:-16;}}
+  .network-line.green{stroke:var(--c-green);stroke-width:1.5;}
+  .network-line.purple{stroke:var(--c-purple);stroke-width:1.5;}
+  .network-line.orange{stroke:var(--c-orange);stroke-width:2;}
+  .network-line.red{stroke:var(--c-red);stroke-width:1.5;}
+
+  .network-labels{display:flex;gap:30px;font-size:9px;color:#64748b;text-align:center;}
+
+  /* State timeline */
+  .state-timeline{flex:1;min-width:300px;}
+  .tl-title{font-size:10px;letter-spacing:2px;color:var(--c-text-sub);text-transform:uppercase;margin-bottom:14px;font-weight:700;}
+  .state-step{display:flex;gap:12px;position:relative;}
+  .state-step:not(:last-child) .step-line{position:absolute;left:13px;top:30px;width:2px;height:40px;background:var(--c-border);transition:background 0.5s;}
+  .step-line.c-green{background:var(--c-green);}
+  .step-line.c-purple{background:var(--c-purple);}
+  .step-line.c-orange{background:var(--c-orange);}
+  .step-line.c-red{background:var(--c-red);}
+
+  .step-dot{width:28px;height:28px;border-radius:50%;border:2px solid var(--c-border);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:all 0.4s;background:#fff;margin-top:1px;}
+  .step-dot.a-green {border-color:var(--c-green);box-shadow:0 0 9px rgba(16,185,129,0.3);background:#ecfdf5;}
+  .step-dot.a-purple{border-color:var(--c-purple);box-shadow:0 0 9px rgba(139,92,246,0.3);background:#f5f3ff;}
+  .step-dot.a-orange{border-color:var(--c-orange);box-shadow:0 0 9px rgba(245,158,11,0.3);background:#fffbeb;}
+  .step-dot.a-red   {border-color:var(--c-red);box-shadow:0 0 9px rgba(239,68,68,0.3);background:#fef2f2;}
+  .step-dot.done    {border-color:var(--c-green);background:#ecfdf5;}
+
+  .step-content{flex:1;padding-bottom:36px;}
+  .step-name{font-size:13px;font-weight:600;color:#94a3b8;transition:color 0.4s;margin-bottom:4px;}
+  .step-name.on{color:var(--c-text);}
+  .step-desc{font-size:11px;color:var(--c-text-sub);line-height:1.7;}
+  .step-tag{display:inline-block;margin-top:6px;font-size:9px;background:#f1f5f9;color:#94a3b8;padding:3px 8px;border-radius:4px;transition:all 0.4s;font-weight:600;letter-spacing:0.05em;}
+  .step-tag.t-green {background:#ecfdf5;color:var(--c-green);border:1px solid var(--c-green);}
+  .step-tag.t-purple{background:#f5f3ff;color:var(--c-purple);border:1px solid var(--c-purple);}
+  .step-tag.t-orange{background:#fffbeb;color:var(--c-orange);border:1px solid var(--c-orange);}
+  .step-tag.t-red   {background:#fef2f2;color:var(--c-red);border:1px solid var(--c-red);}
+
+  /* Dashboard */
+  .dashboard{max-width:1040px;margin:0 auto;padding:0 28px 24px;}
+  .dash-title{font-size:10px;letter-spacing:2px;color:var(--c-text-sub);text-transform:uppercase;margin-bottom:6px;font-weight:700;}
+  .dash-note{font-size:11px;color:#94a3b8;margin-bottom:12px;line-height:1.6;}
+  .dash-grid{display:flex;justify-content:center;}
+  .dash-card{background:#fff;border:1px solid var(--c-border);border-radius:12px;padding:18px 52px;box-shadow:0 4px 14px rgba(0,0,0,0.04);}
+  .dash-label{font-size:10px;color:var(--c-text-sub);letter-spacing:1px;margin-bottom:6px;font-weight:600;}
+  .dash-value{font-size:22px;font-weight:700;color:var(--c-green);transition:color 0.4s;}
+  .dash-sub{font-size:10px;color:#94a3b8;margin-top:2px;}
+
+  /* Responsive */
+  @media (max-width:720px){
+    .hero h1{font-size:20px;}
+    .demo-wrapper{padding:12px 16px;gap:18px;}
+    .box-scene{flex:0 0 100%;}
+    .state-timeline{min-width:100%;}
+    .dashboard{padding:0 16px 20px;}
+    .dash-card{padding:14px 28px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo">BOXERNET</div>
+  <h1>つぶすくん Smart Recycle Box</h1>
+  <p>IoT 状態遷移マネジメントで、リサイクルインフラを最適化</p>
+</div>
+
+<div class="controls">
+  <div class="btn-group">
+    <button class="btn btn-reset" onclick="reset()">↺ リセット</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">▶ デモを開始</button>
+  </div>
+  <div class="step-counter" id="stepCounter">ステップ 0 / 6</div>
+</div>
+
+<div class="demo-wrapper">
+  <div class="box-scene">
+    <div class="box-container">
+      <div class="box-body" id="boxBody">
+        <div class="alert-badge" id="alertBadge">回収指示発信中</div>
+        <div class="iot-indicator" id="iotDot"></div>
+        <div class="compress-ring" id="compressRing">⚙</div>
+        <div class="box-screen">
+          <div class="screen-status" id="screenStatus">READY</div>
+          <div class="screen-id">BOX-001 / 渋谷区</div>
+          <div class="screen-bar"><div class="screen-fill" id="screenFill" style="width:0%"></div></div>
+        </div>
+        <div class="slots">
+          <div class="slot" id="slot1">□</div>
+          <div class="slot" id="slot2">□</div>
+          <div class="slot" id="slot3">□</div>
+          <div class="slot" id="slot4">□</div>
+        </div>
+        <div class="slot-label" id="slotLabel">収納スロット × 4</div>
+      </div>
+      <div class="box-lid"><div class="box-lid-text">BOXERNET</div></div>
+      <div class="drop-item" id="dropItem">♻</div>
+    </div>
+    <svg width="200" height="36" viewBox="0 0 200 36">
+      <line x1="100" y1="0" x2="30"  y2="31" class="network-line" id="net1"/>
+      <line x1="100" y1="0" x2="100" y2="31" class="network-line" id="net2"/>
+      <line x1="100" y1="0" x2="170" y2="31" class="network-line" id="net3"/>
+      <circle cx="30"  cy="31" r="4" fill="#fff" stroke="#cbd5e1"/>
+      <circle cx="100" cy="31" r="4" fill="#fff" stroke="#cbd5e1"/>
+      <circle cx="170" cy="31" r="4" fill="#fff" stroke="#cbd5e1"/>
+    </svg>
+    <div class="network-labels">
+      <span>クラウド<br>サーバー</span>
+      <span>管理者<br>アプリ</span>
+      <span>収集<br>業者</span>
+    </div>
+  </div>
+
+  <div class="state-timeline">
+    <div class="tl-title">サービスフロー（状態遷移）</div>
+
+    <div class="state-step">
+      <div><div class="step-dot a-green" id="dot0">⬜</div><div class="step-line" id="ln0"></div></div>
+      <div class="step-content">
+        <div class="step-name on" id="nm0">① 待機（IDLE）</div>
+        <div class="step-desc">BOX はスタンバイ中。IoT センサーが満空・重量をリアルタイム監視。アプリで近隣の空き BOX を確認できます。</div>
+        <div class="step-tag t-green" id="tg0">状態: IDLE ● センサー稼働中</div>
+      </div>
+    </div>
+
+    <div class="state-step">
+      <div><div class="step-dot" id="dot1">♻</div><div class="step-line" id="ln1"></div></div>
+      <div class="step-content">
+        <div class="step-name" id="nm1">② 投入（DEPOSIT）</div>
+        <div class="step-desc">リサイクル品を投入。重量センサーが種別・重量を検知しポイントを自動付与。データをクラウドへ即時送信します。</div>
+        <div class="step-tag" id="tg1">状態: DEPOSIT ● 重量センサー検知</div>
+      </div>
+    </div>
+
+    <div class="state-step">
+      <div><div class="step-dot" id="dot2">⚙</div><div class="step-line" id="ln2"></div></div>
+      <div class="step-content">
+        <div class="step-name" id="nm2">③ 圧縮（COMPRESS）</div>
+        <div class="step-desc">一定量蓄積で自動圧縮機構が起動。容量を最大 3 倍に拡張し回収頻度を削減。圧縮完了後に次の受け入れを再開します。</div>
+        <div class="step-tag" id="tg2">状態: COMPRESS ● 自動圧縮中</div>
+      </div>
+    </div>
+
+    <div class="state-step">
+      <div><div class="step-dot" id="dot3">📡</div><div class="step-line" id="ln3"></div></div>
+      <div class="step-content">
+        <div class="step-name" id="nm3">④ 回収指示発信（70%）</div>
+        <div class="step-desc">充填率 70% 到達でクラウドが収集業者へ自動発注。最適回収ルートを生成し、満杯前に計画的な回収を実現します。</div>
+        <div class="step-tag" id="tg3">状態: ORDER ● 収集業者へ回収指示</div>
+      </div>
+    </div>
+
+    <div class="state-step">
+      <div><div class="step-dot" id="dot4">🔒</div><div class="step-line" id="ln4"></div></div>
+      <div class="step-content">
+        <div class="step-name" id="nm4">⑤ 投入口シャットダウン（100%）</div>
+        <div class="step-desc">満杯到達で投入口を自動ロック。これ以上の投入を物理的に遮断し、溢れ・詰まりを防止。利用者アプリに使用不可を表示します。</div>
+        <div class="step-tag" id="tg4">状態: SHUTDOWN ● 投入口ロック中</div>
+      </div>
+    </div>
+
+    <div class="state-step">
+      <div><div class="step-dot" id="dot5">✅</div></div>
+      <div class="step-content">
+        <div class="step-name" id="nm5">⑥ 回収完了（COLLECTED）</div>
+        <div class="step-desc">回収後、自動リセットで IDLE 状態に復帰。稼働率・圧縮効率・回収リードタイムのデータが蓄積され運用最適化に活用されます。</div>
+        <div class="step-tag" id="tg5">状態: IDLE ● データ記録完了</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="dash-title">事業者向け 運用ダッシュボード</div>
+  <div class="dash-note">Boxernet が事業者（自販機オペレーター・収集業者・行政）へ提供する遠隔管理画面のイメージ。一般利用者には表示されません。</div>
+  <div class="dash-grid">
+    <div class="dash-card">
+      <div class="dash-label">本日の投入回数</div>
+      <div class="dash-value" id="dv0">0回</div>
+      <div class="dash-sub">BOX-001 本日累計</div>
+    </div>
+  </div>
+</div>
+
+<script>
+var STEPS = 6;
+var cur = -1;
+
+var C = {
+  green:  { iotColor:'#10b981', border:'#0B5FFF', shadow:'rgba(16,185,129,0.18)',  dc:'a-green',  tc:'t-green',  nc:'green'  },
+  blue:   { iotColor:'#0B5FFF', border:'#0B5FFF', shadow:'rgba(11,95,255,0.20)',   dc:'a-green',  tc:'t-green',  nc:'green'  },
+  purple: { iotColor:'#8b5cf6', border:'#8b5cf6', shadow:'rgba(139,92,246,0.20)',  dc:'a-purple', tc:'t-purple', nc:'purple' },
+  orange: { iotColor:'#f59e0b', border:'#f59e0b', shadow:'rgba(245,158,11,0.20)',  dc:'a-orange', tc:'t-orange', nc:'orange' },
+  red:    { iotColor:'#ef4444', border:'#ef4444', shadow:'rgba(239,68,68,0.20)',   dc:'a-red',    tc:'t-red',    nc:'red'    }
+};
+
+var cfg = [
+  { c:C.green,  fill:0,   status:'READY',     slots:'empty',    compress:false, alert:false, shutdown:false, dash:['0回']  },
+  { c:C.green,  fill:55,  status:'DEPOSIT',   slots:'half',     compress:false, alert:false, shutdown:false, dash:['47回'] },
+  { c:C.purple, fill:70,  status:'COMPRESS',  slots:'compress', compress:true,  alert:false, shutdown:false, dash:['47回'] },
+  { c:C.orange, fill:70,  status:'ORDER 70%', slots:'compress', compress:false, alert:true,  shutdown:false, dash:['47回'] },
+  { c:C.red,    fill:100, status:'SHUTDOWN',  slots:'shutdown', compress:false, alert:false, shutdown:true,  dash:['47回'] },
+  { c:C.green,  fill:0,   status:'COLLECTED', slots:'empty',    compress:false, alert:false, shutdown:false, dash:['91回'] }
+];
+
+var slotEmojis = ['🥤','🧴','🥫','🧃'];
+var lineColors = ['c-green','c-green','c-purple','c-orange','c-red'];
+
+function nextStep(){
+  cur++;
+  if(cur>=STEPS){ reset(); return; }
+  apply(cur);
+}
+
+function apply(idx){
+  var s = cfg[idx];
+  var col = s.c;
+
+  document.getElementById('nextBtn').textContent = idx < STEPS-1 ? '▶ 次へ' : '✓ 完了';
+  document.getElementById('stepCounter').textContent = 'ステップ '+(idx+1)+' / '+STEPS;
+
+  var sc = document.getElementById('screenStatus');
+  sc.textContent = s.status; sc.style.color = col.iotColor;
+  document.getElementById('screenFill').style.width = s.fill+'%';
+  document.getElementById('screenFill').style.background = col.iotColor;
+
+  var iot = document.getElementById('iotDot');
+  iot.style.background = col.iotColor;
+  iot.style.boxShadow = '0 0 8px '+col.iotColor;
+
+  var body = document.getElementById('boxBody');
+  body.style.borderColor = col.border;
+  body.style.boxShadow = '0 6px 24px '+col.shadow;
+
+  document.getElementById('compressRing').classList.toggle('active', s.compress);
+  document.getElementById('alertBadge').classList.toggle('active', s.alert);
+
+  var label = document.getElementById('slotLabel');
+  for(var i=0;i<4;i++){
+    var sl = document.getElementById('slot'+(i+1));
+    sl.classList.remove('filled','compressed','shutdown');
+    if(s.slots==='empty'){ sl.textContent='□'; }
+    else if(s.slots==='half'){
+      if(i<2){ sl.textContent=slotEmojis[i]; sl.classList.add('filled'); }
+      else { sl.textContent='□'; }
+    }
+    else if(s.slots==='compress'){ sl.textContent='■'; sl.classList.add('compressed'); }
+    else if(s.slots==='shutdown'){ sl.textContent='🔒'; sl.classList.add('shutdown'); }
+  }
+  label.textContent = s.shutdown ? '⛔ 投入口 ロック中' : '収納スロット × 4';
+  label.style.color  = s.shutdown ? '#ef4444' : '#94a3b8';
+
+  if(idx===1) triggerDrop();
+
+  var nets = ['net1','net2','net3'];
+  for(var n=0;n<nets.length;n++){
+    var el = document.getElementById(nets[n]);
+    el.className = 'network-line';
+    if(idx>=1) el.classList.add(col.nc);
+  }
+
+  animateDash(s.dash, col.iotColor);
+
+  for(var j=0;j<STEPS;j++){
+    var d=document.getElementById('dot'+j);
+    var nm=document.getElementById('nm'+j);
+    var tg=document.getElementById('tg'+j);
+    var ln=document.getElementById('ln'+j);
+    d.className='step-dot'; nm.className='step-name'; tg.className='step-tag';
+    if(ln) ln.className='step-line';
+    if(j<idx){
+      d.classList.add('done');
+      if(ln) ln.classList.add(lineColors[j]||'c-green');
+    } else if(j===idx){
+      d.classList.add(col.dc); nm.classList.add('on'); tg.classList.add(col.tc);
+      if(ln) ln.classList.add(lineColors[j]||'c-green');
+    }
+  }
+}
+
+function triggerDrop(){
+  var d=document.getElementById('dropItem');
+  d.className='drop-item';
+  d.textContent=slotEmojis[Math.floor(Math.random()*4)];
+  setTimeout(function(){d.classList.add('falling');},40);
+  setTimeout(function(){d.classList.add('landed');},560);
+  setTimeout(function(){d.className='drop-item';},1100);
+}
+
+function animateDash(targets, color){
+  var ids=['dv0'];
+  var prev=ids.map(function(id){return document.getElementById(id).textContent;});
+  var start=performance.now();
+  ids.forEach(function(id){document.getElementById(id).style.color=color;});
+  (function tick(now){
+    var t=Math.min((now-start)/700,1);
+    var e=1-Math.pow(1-t,3);
+    ids.forEach(function(id,i){
+      var el=document.getElementById(id);
+      if(targets[i]==='—'){
+        el.textContent=targets[i]; return;
+      }
+      var pn=parseFloat(prev[i])||0;
+      var tn=parseFloat(targets[i]);
+      var suffix=targets[i].replace(/[\d.]/g,'');
+      el.textContent=Math.round(pn+(tn-pn)*e)+suffix;
+    });
+    if(t<1) requestAnimationFrame(tick);
+  })(start);
+}
+
+function reset(){
+  cur=-1;
+  document.getElementById('nextBtn').textContent='▶ デモを開始';
+  document.getElementById('stepCounter').textContent='ステップ 0 / '+STEPS;
+  document.getElementById('screenStatus').textContent='READY';
+  document.getElementById('screenStatus').style.color='#10b981';
+  document.getElementById('screenFill').style.width='0%';
+  document.getElementById('screenFill').style.background='#10b981';
+  document.getElementById('iotDot').style.background='#10b981';
+  document.getElementById('iotDot').style.boxShadow='0 0 8px #10b981';
+  document.getElementById('boxBody').style.borderColor='#0B5FFF';
+  document.getElementById('boxBody').style.boxShadow='0 6px 24px rgba(11,95,255,0.15)';
+  document.getElementById('compressRing').classList.remove('active');
+  document.getElementById('alertBadge').classList.remove('active');
+  document.getElementById('slotLabel').textContent='収納スロット × 4';
+  document.getElementById('slotLabel').style.color='#94a3b8';
+  for(var i=0;i<4;i++){
+    var sl=document.getElementById('slot'+(i+1));
+    sl.textContent='□'; sl.classList.remove('filled','compressed','shutdown');
+  }
+  var nets=['net1','net2','net3'];
+  for(var n=0;n<nets.length;n++) document.getElementById(nets[n]).className='network-line';
+  animateDash(['0回'],'#10b981');
+  for(var j=0;j<STEPS;j++){
+    document.getElementById('dot'+j).className='step-dot'+(j===0?' a-green':'');
+    document.getElementById('nm'+j).className='step-name'+(j===0?' on':'');
+    document.getElementById('tg'+j).className='step-tag'+(j===0?' t-green':'');
+    var ln=document.getElementById('ln'+j);
+    if(ln) ln.className='step-line';
+  }
+}
+
+window.onload=reset;
+</script>
+</body>
+</html>
