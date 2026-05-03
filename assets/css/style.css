@@ -325,3 +325,39 @@ a:hover { text-decoration: underline; }
   }
   .page-content th { padding-bottom: 4px; border-bottom: none; }
 }
+
+/* ============ HOME hero - City OS background (Override) ============ */
+.home-hero {
+  position: relative;
+  background-image:
+    linear-gradient(135deg, rgba(11, 95, 255, 0.55) 0%, rgba(0, 0, 0, 0.85) 100%),
+    url('../img/hero-city.jpg');
+  background-size: cover, cover;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  overflow: hidden;
+}
+.home-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../img/network-overlay.svg') center / cover no-repeat;
+  opacity: 0.6;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.home-hero .container {
+  position: relative;
+  z-index: 2;
+}
+.home-hero h1 {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.6);
+}
+.home-hero .tagline {
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+@media (max-width: 768px) {
+  .home-hero {
+    background-attachment: scroll;
+  }
+}
