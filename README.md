@@ -32,7 +32,7 @@ company:
   ceo: 高橋 明宏
   address: 東京都豊島区
   patent_number: "第7534835号"
-  email: info@boxernet.online
+  email: info@pickup-st.com
 ```
 
 各 Markdown ファイルから `{{ site.company.name }}` のように参照できます。
