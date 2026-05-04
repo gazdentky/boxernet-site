@@ -361,3 +361,81 @@ a:hover { text-decoration: underline; }
     background-attachment: scroll;
   }
 }
+
+
+
+/* ============ Sub-page heroes - City variations ============ */
+.hero-shinjuku,
+.hero-yokohama,
+.hero-marunouchi,
+.hero-rainbow {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  overflow: hidden;
+}
+
+.hero-shinjuku {
+  background-image:
+    linear-gradient(180deg, rgba(11, 95, 255, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%),
+    url('../img/hero-shinjuku.jpg');
+}
+
+.hero-yokohama {
+  background-image:
+    linear-gradient(180deg, rgba(11, 95, 255, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%),
+    url('../img/hero-yokohama.jpg');
+}
+
+.hero-marunouchi {
+  background-image:
+    linear-gradient(180deg, rgba(11, 95, 255, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%),
+    url('../img/hero-marunouchi.jpg');
+}
+
+.hero-rainbow {
+  background-image:
+    linear-gradient(180deg, rgba(11, 95, 255, 0.4) 0%, rgba(0, 0, 0, 0.85) 100%),
+    url('../img/hero-rainbow.jpg');
+}
+
+.hero-shinjuku::before,
+.hero-yokohama::before,
+.hero-marunouchi::before,
+.hero-rainbow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('../img/network-overlay.svg');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.hero-shinjuku .container,
+.hero-yokohama .container,
+.hero-marunouchi .container,
+.hero-rainbow .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-shinjuku h1,
+.hero-yokohama h1,
+.hero-marunouchi h1,
+.hero-rainbow h1 {
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.hero-shinjuku .lead,
+.hero-yokohama .lead,
+.hero-marunouchi .lead,
+.hero-rainbow .lead {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}

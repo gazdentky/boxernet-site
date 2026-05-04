@@ -5,6 +5,7 @@ heading: お問い合わせ
 description: 株式会社Boxernetへのお問い合わせはこちらから。
 permalink: /contact/
 hero: true
+hero_class: hero-rainbow
 lead: サービス導入・取材・パートナーシップに関するお問い合わせはこちらから。
 ---
 

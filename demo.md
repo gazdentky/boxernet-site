@@ -5,6 +5,7 @@ heading: つぶすくん インタラクティブデモ
 description: PET 専用スマートリサイクルボックス「つぶすくん」の状態遷移マネジメントを、ブラウザ上で体験できるインタラクティブデモ。
 permalink: /demo/
 hero: true
+hero_class: hero-yokohama
 lead: 投入から回収完了までの 6 ステップを、IoT センサーとクラウドの動きとともに体験できます。
 ---
 

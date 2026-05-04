@@ -5,6 +5,7 @@ heading: 会社概要
 description: 株式会社Boxernetの会社概要。設立日、資本金、所在地、保有特許などの基本情報を掲載しています。
 permalink: /company/
 hero: true
+hero_class: hero-marunouchi
 lead: 株式会社Boxernetの基本情報をご紹介します。
 ---
 

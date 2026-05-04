@@ -5,6 +5,7 @@ heading: 事業内容
 description: Boxernetの事業内容。つぶすくん、ピックアップステーション、状態遷移検知プラットフォームをご紹介します。
 permalink: /business/
 hero: true
+hero_class: hero-shinjuku
 lead: 物流・リサイクル・公共空間のIoT機器を、状態遷移で管理する都市インフラOS。
 ---
 
