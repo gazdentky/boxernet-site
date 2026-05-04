@@ -5,7 +5,7 @@ description: >-
   株式会社Boxernetは、各種センサーとHMMアルゴリズムで対象物の状態遷移を
   検知・推定し、遠隔管理を実現するIoTスタートアップです。
 url: "https://boxernet.online"
-baseurl: "/boxernet-site"
+baseurl: ""
 lang: ja
 
 # 会社情報（各ページから参照可能）
