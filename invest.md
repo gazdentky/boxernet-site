@@ -57,6 +57,32 @@ permalink: /invest/
 .iv-btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);}
 .iv-btn-ghost:hover{background:rgba(255,255,255,.1);text-decoration:none;color:#fff;}
 
+/* メール表示（クリック不可、テキストとして表示） */
+.iv-hero-email{
+  display:inline-flex;flex-direction:column;gap:2px;
+  padding:10px 22px;border-radius:10px;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);
+}
+.iv-hero-email-label{
+  font-size:11px;color:#7ff0db;letter-spacing:.12em;font-weight:600;
+}
+.iv-hero-email-addr{
+  font-size:15px;color:#ffffff;font-weight:700;letter-spacing:.02em;
+  font-family:Menlo,Consolas,monospace;
+}
+.iv-cta-email{
+  margin-top:24px;display:inline-flex;flex-direction:column;gap:4px;
+  padding:14px 28px;border-radius:12px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+}
+.iv-cta-email-label{
+  font-size:11px;color:#ffffff;letter-spacing:.16em;font-weight:700;opacity:.85;
+}
+.iv-cta-email-addr{
+  font-size:18px;color:#ffffff;font-weight:800;letter-spacing:.02em;
+  font-family:Menlo,Consolas,monospace;
+}
+
 .iv-section{margin:72px 0;}
 .iv-eyebrow{
   font-size:11px;letter-spacing:.22em;color:#0B5FFF;font-weight:700;
@@ -239,9 +265,10 @@ permalink: /invest/
       <a href="/assets/pdf/boxernet-pitch-deck.pdf" class="iv-btn iv-btn-primary" download>
         ピッチデック（PDF）をダウンロード
       </a>
-      <a href="mailto:info@pickup-st.com?subject=%5B%E6%8A%95%E8%B3%87%E5%AE%B6%E3%81%AE%E7%9A%86%E6%A7%98%5D%20Boxernet%20%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" class="iv-btn iv-btn-ghost">
-        メールで連絡
-      </a>
+      <div class="iv-hero-email">
+        <span class="iv-hero-email-label">お問い合わせ先</span>
+        <span class="iv-hero-email-addr">info@pickup-st.com</span>
+      </div>
     </div>
   </div>
 </section>
@@ -459,9 +486,10 @@ permalink: /invest/
     <a href="/assets/pdf/boxernet-pitch-deck.pdf" class="iv-cta-primary" download>
       ピッチデック（PDF）をダウンロード
     </a>
-    <a href="mailto:info@pickup-st.com?subject=%5B%E6%8A%95%E8%B3%87%E5%AE%B6%E3%81%AE%E7%9A%86%E6%A7%98%5D%20Boxernet%20%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" class="iv-cta-secondary">
-      info@pickup-st.com に問い合わせ
-    </a>
+  </div>
+  <div class="iv-cta-email">
+    <span class="iv-cta-email-label">お問い合わせ先</span>
+    <span class="iv-cta-email-addr">info@pickup-st.com</span>
   </div>
 </section>
 
