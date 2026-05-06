@@ -262,8 +262,8 @@ permalink: /invest/
       シードラウンドの調達を通じて、量産・初期顧客開拓・チーム拡大を加速します。
     </p>
     <div class="iv-hero-cta">
-      <a href="/assets/pdf/boxernet-pitch-deck.pdf" class="iv-btn iv-btn-primary" download>
-        ピッチデック（PDF）をダウンロード
+      <a href="/pitch-request/" class="iv-btn iv-btn-primary">
+        資料請求フォームへ進む
       </a>
       <div class="iv-hero-email">
         <span class="iv-hero-email-label">お問い合わせ先</span>
@@ -480,11 +480,11 @@ permalink: /invest/
   <h3>詳細資料・面談のご案内</h3>
   <p>
     ピッチデック（PDF）には、本ページに掲載していない事業計画・財務見通し・ロードマップ詳細を含みます。<br>
-    投資家の皆様、戦略パートナー候補の皆様からのお問い合わせを歓迎いたします。
+    投資家の皆様、戦略パートナー候補の皆様は、資料請求フォームよりご請求ください。
   </p>
   <div class="iv-cta-row">
-    <a href="/assets/pdf/boxernet-pitch-deck.pdf" class="iv-cta-primary" download>
-      ピッチデック（PDF）をダウンロード
+    <a href="/pitch-request/" class="iv-cta-primary">
+      資料請求フォームへ進む
     </a>
   </div>
   <div class="iv-cta-email">
