@@ -29,7 +29,7 @@ permalink: /products/lite/
   margin-bottom:18px;font-weight:600;
 }
 .bl-hero h2{
-  font-size:clamp(26px,4.5vw,42px);font-weight:800;color:#fff;
+  font-size:clamp(22px,3.6vw,36px);font-weight:800;color:#fff;
   line-height:1.25;margin:0 0 16px;
 }
 .bl-hero h2 em{color:#00C6A9;font-style:normal;}
@@ -150,7 +150,7 @@ permalink: /products/lite/
 <section class="bl-hero">
   <div class="bl-hero-inner">
     <span class="bl-edition">No Cloud · No Cellular · No Wi-Fi Edition</span>
-    <h2>Boxernet Lite<br><em>通信レス・TinyML</em> スマートリサイクルボックス</h2>
+    <h2>Boxernet Lite<br><em>通信レス・TinyML</em><br>スマートリサイクルボックス</h2>
     <p class="bl-lead">
       マンション分譲・賃貸運営のために設計された、エッジ AI 単体で完結するスマートゴミ箱。
       ESP32-S3 上の TinyML が「分別判定」「満杯予測」「異常検知」をデバイス内で処理。
