@@ -118,11 +118,11 @@ permalink: /pitch-request/thanks/
   <p>
     14 スライド構成、PDF 約 300KB。製品概要・市場・チーム・トラクション・資金使途まで網羅しています。
   </p>
-  <a href="/assets/pdf/boxernet-pitch-deck.pdf" class="pt-download-btn" download>
-    <span class="pt-download-icon">↓</span>
-    ピッチデック（PDF）をダウンロード
+  <a href="/assets/pdf/boxernet-pitch-deck.pdf" class="pt-download-btn" target="_blank" rel="noopener">
+    <span class="pt-download-icon">↗</span>
+    ピッチデック（PDF）を閲覧する
   </a>
-  <div class="pt-meta">最終更新：2026年5月　/　Boxernet_PitchDeck_Seed2026.pdf</div>
+  <div class="pt-meta">新しいタブでブラウザ内表示します　/　最終更新：2026年5月</div>
 </div>
 
 <div class="pt-next-row">
