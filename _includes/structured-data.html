@@ -1,0 +1,113 @@
+{%- comment -%}
+  JSON-LD 構造化データ
+  - 全ページで Organization と WebSite を出力
+  - トップページ (/) では追加で SiteNavigationElement を出力
+  - 製品ページ (/products/lite/) では Product を出力
+{%- endcomment -%}
+
+<!-- Organization -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ site.company.name }}",
+  "alternateName": "{{ site.company.name_en }}",
+  "url": "{{ site.url }}",
+  "logo": "{{ site.url }}/assets/og-image.png",
+  "email": "{{ site.company.email }}",
+  "foundingDate": "2023-02-07",
+  "founder": {
+    "@type": "Person",
+    "name": "{{ site.company.ceo }}"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "豊島区",
+    "addressRegion": "東京都",
+    "addressCountry": "JP"
+  },
+  "description": "{{ site.description | strip_newlines | strip }}",
+  "sameAs": []
+}
+</script>
+
+<!-- WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.title }}",
+  "url": "{{ site.url }}",
+  "inLanguage": "ja",
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.company.name }}"
+  }
+}
+</script>
+
+{%- if page.url == "/" -%}
+<!-- SiteNavigationElement (トップページのみ) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "サイトナビゲーション",
+  "itemListElement": [
+    {%- for item in site.nav -%}
+    {
+      "@type": "SiteNavigationElement",
+      "position": {{ forloop.index }},
+      "name": "{{ item.title }}",
+      "url": "{{ site.url }}{{ item.url }}"
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+{%- endif -%}
+
+{%- if page.url contains "/products/lite" -%}
+<!-- Product: Boxernet Lite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Boxernet Lite",
+  "description": "通信レス・TinyML 搭載のマンション設置型スマートゴミ箱。ESP32-S3 とエッジ AI で分別判定・満杯予測・異常検知をデバイス単体で完結。",
+  "brand": {
+    "@type": "Brand",
+    "name": "Boxernet"
+  },
+  "manufacturer": {
+    "@type": "Organization",
+    "name": "{{ site.company.name }}",
+    "url": "{{ site.url }}"
+  },
+  "category": "スマートリサイクルボックス / IoT デバイス",
+  "url": "{{ site.url }}/products/lite/"
+}
+</script>
+{%- endif -%}
+
+{%- if page.url contains "/business" -%}
+<!-- Service: つぶすくん -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "つぶすくん（スマートリサイクルボックス）",
+  "serviceType": "IoT スマートリサイクルボックス",
+  "description": "PET 専用スマートリサイクルボックス。各種センサーと HMM アルゴリズムで満杯状態と回収タイミングを遠隔管理。",
+  "provider": {
+    "@type": "Organization",
+    "name": "{{ site.company.name }}",
+    "url": "{{ site.url }}"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Japan"
+  }
+}
+</script>
+{%- endif -%}

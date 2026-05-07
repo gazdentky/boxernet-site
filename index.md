@@ -1,6 +1,8 @@
 ---
 layout: default
 title: 株式会社Boxernet | IoTで都市インフラを可視化する
+description: 株式会社BoxernetはIoTセンサーとHMMアルゴリズムで「状態遷移」を検知・推定するIoTスタートアップ。スマートリサイクルボックス「つぶすくん」、ピックアップステーション、状態遷移マネジメント基盤を提供。
+keywords: IoT,スマートリサイクルボックス,ペットボトル回収,つぶすくん,Boxernet,ピックアップステーション,状態遷移,HMM,廃棄物管理 DX
 ---
 
 <section class="home-hero">

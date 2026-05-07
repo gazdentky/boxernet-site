@@ -2,7 +2,7 @@
 layout: default
 title: 会社概要 | 株式会社Boxernet
 heading: 会社概要
-description: 株式会社Boxernetの会社概要。設立日、資本金、所在地、保有特許などの基本情報を掲載しています。
+description: 株式会社Boxernet の会社概要。2023年2月設立、東京都豊島区。代表取締役 高橋明宏。スマートリサイクルボックス「つぶすくん」など、IoT 都市インフラ事業を展開。特許第7534835号取得。
 permalink: /company/
 hero: true
 hero_class: hero-marunouchi

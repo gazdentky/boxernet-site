@@ -4,26 +4,9 @@ tagline: IoTで、都市インフラの状態を可視化する。
 description: >-
   株式会社Boxernetは、各種センサーとHMMアルゴリズムで対象物の状態遷移を
   検知・推定し、遠隔管理を実現するIoTスタートアップです。
-url: "https://pickup-st.com"
+url: "https://boxernet.online"
 baseurl: ""
 lang: ja
-
-# SEO 用デフォルト画像（OGP / Twitter Card）
-image: /assets/og-image.png
-
-# 著者情報（jekyll-seo-tag が利用）
-author:
-  name: 株式会社Boxernet
-  email: info@pickup-st.com
-
-# Twitter / SNS（任意・将来用）
-# twitter:
-#   username: boxernet
-#   card: summary_large_image
-# social:
-#   name: 株式会社Boxernet
-#   links:
-#     - https://twitter.com/boxernet
 
 # 会社情報（各ページから参照可能）
 company:
@@ -48,14 +31,10 @@ nav:
     url: /
   - title: 事業内容
     url: /business/
-  - title: 製品
-    url: /products/lite/
   - title: デモ
     url: /demo/
   - title: 会社概要
     url: /company/
-  - title: 投資家の皆様へ
-    url: /invest/
   - title: お問い合わせ
     url: /contact/
 

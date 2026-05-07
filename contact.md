@@ -2,7 +2,7 @@
 layout: default
 title: お問い合わせ | 株式会社Boxernet
 heading: お問い合わせ
-description: 株式会社Boxernetへのお問い合わせはこちらから。
+description: 株式会社Boxernet へのお問い合わせ・取材依頼・パートナーシップのご相談はこちらから。スマートリサイクルボックス「つぶすくん」やピックアップステーション導入のご相談も受け付けています。
 permalink: /contact/
 hero: true
 hero_class: hero-rainbow
