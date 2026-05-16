@@ -43,9 +43,10 @@ Boxernetは、物流・リサイクル・公共空間に置かれるIoT機器の
   }
   .biz-demo-frame{
     width:100%;
-    height:760px;
+    height:1080px;
     border:0;
     display:block;
+    transition:height 0.3s ease;
   }
   .biz-demo-cta{
     text-align:center;
@@ -71,9 +72,25 @@ Boxernetは、物流・リサイクル・公共空間に置かれるIoT機器の
     margin-top:8px;
   }
   @media (max-width:720px){
-    .biz-demo-frame{ height:1200px; }
+    .biz-demo-frame{ height:1700px; }
   }
 </style>
+
+<script>
+  // iframe 内のデモから高さ通知を受信して自動リサイズ
+  // ※ つぶすくんデモのみ対象（pickup-station-demo は別）
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if(d && d.source === 'tsubusukun-demo' && d.type === 'resize' && typeof d.height === 'number'){
+      var iframes = document.querySelectorAll('iframe.biz-demo-frame');
+      iframes.forEach(function(f){
+        // pickup-station 用 iframe はスキップ
+        if(f.classList.contains('biz-demo-frame--pickup')) return;
+        f.style.height = Math.max(d.height + 20, 600) + 'px';
+      });
+    }
+  });
+</script>
 
 ## つぶすくん インタラクティブデモ
 

@@ -36,6 +36,13 @@
   .hero h1{font-size:24px;font-weight:700;margin-bottom:6px;color:var(--c-text);letter-spacing:0.04em;}
   .hero p{font-size:13px;color:var(--c-text-sub);}
 
+  /* Value Proposition - One Liner */
+  .value-prop{max-width:760px;margin:14px auto 0;padding:14px 22px;background:linear-gradient(135deg,rgba(11,95,255,0.06),rgba(0,198,169,0.08));border:1px solid rgba(0,198,169,0.35);border-radius:10px;text-align:center;}
+  .value-prop-main{font-size:14px;font-weight:600;color:var(--c-text);line-height:1.7;}
+  .value-prop-main b{color:var(--c-primary);}
+  .value-prop-main b.accent{color:var(--c-accent);}
+  .value-prop-sub{font-size:10px;color:#94a3b8;margin-top:6px;letter-spacing:0.3px;}
+
   /* Controls */
   .controls{text-align:center;padding:0 20px 16px;}
   .btn-group{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
@@ -44,7 +51,13 @@
   .btn-primary:hover{background:var(--c-primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(11,95,255,0.25);}
   .btn-reset{background:#fff;color:var(--c-text-sub);border:1px solid var(--c-border);}
   .btn-reset:hover{color:var(--c-primary);border-color:var(--c-primary);}
+  .btn-pause{background:#fff;color:var(--c-accent);border:1px solid var(--c-accent);min-width:120px;}
+  .btn-pause:hover{background:var(--c-accent);color:#fff;}
+  .btn-pause.is-playing{background:var(--c-accent);color:#fff;}
+  .btn-pause.is-playing:hover{background:#00a890;}
   .step-counter{font-size:11px;color:var(--c-text-sub);margin-top:8px;}
+  .auto-hint{font-size:10px;color:#94a3b8;margin-top:4px;}
+  .auto-hint.hidden{display:none;}
 
   /* Demo wrapper */
   .demo-wrapper{display:flex;gap:24px;padding:16px 28px;max-width:1040px;margin:0 auto;align-items:flex-start;flex-wrap:wrap;}
@@ -125,11 +138,28 @@
   .dashboard{max-width:1040px;margin:0 auto;padding:0 28px 24px;}
   .dash-title{font-size:10px;letter-spacing:2px;color:var(--c-text-sub);text-transform:uppercase;margin-bottom:6px;font-weight:700;}
   .dash-note{font-size:11px;color:#94a3b8;margin-bottom:12px;line-height:1.6;}
-  .dash-grid{display:flex;justify-content:center;}
-  .dash-card{background:#fff;border:1px solid var(--c-border);border-radius:12px;padding:18px 52px;box-shadow:0 4px 14px rgba(0,0,0,0.04);}
+  .dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  .dash-card{background:#fff;border:1px solid var(--c-border);border-radius:12px;padding:16px 14px;box-shadow:0 4px 14px rgba(0,0,0,0.04);position:relative;text-align:center;}
+  .dash-card .est-tag{position:absolute;top:8px;right:8px;font-size:9px;color:var(--c-text-sub);background:#f1f5f9;padding:2px 6px;border-radius:4px;letter-spacing:0.5px;font-weight:600;}
   .dash-label{font-size:10px;color:var(--c-text-sub);letter-spacing:1px;margin-bottom:6px;font-weight:600;}
   .dash-value{font-size:22px;font-weight:700;color:var(--c-green);transition:color 0.4s;}
+  .dash-value .unit{font-size:12px;font-weight:600;margin-left:2px;color:var(--c-text-sub);}
   .dash-sub{font-size:10px;color:#94a3b8;margin-top:2px;}
+
+  /* CTA Section (shown on final step) */
+  .cta-section{max-width:1040px;margin:0 auto;padding:0 28px 32px;opacity:0;max-height:0;overflow:hidden;transition:opacity 0.6s ease,max-height 0.6s ease;}
+  .cta-section.visible{opacity:1;max-height:520px;}
+  .cta-inner{background:linear-gradient(135deg,rgba(11,95,255,0.07),rgba(0,198,169,0.10));border:1px solid rgba(0,198,169,0.4);border-radius:14px;padding:24px 24px;text-align:center;box-shadow:0 6px 20px rgba(11,95,255,0.08);}
+  .cta-title{font-size:16px;font-weight:700;color:var(--c-text);margin-bottom:6px;}
+  .cta-desc{font-size:12px;color:var(--c-text-sub);margin-bottom:18px;line-height:1.7;}
+  .cta-buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .cta-btn{padding:11px 20px;border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;transition:all 0.2s;display:inline-flex;align-items:center;gap:6px;font-family:inherit;}
+  .cta-btn-primary{background:var(--c-accent);color:#fff;}
+  .cta-btn-primary:hover{background:#00a890;transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,198,169,0.3);}
+  .cta-btn-secondary{background:var(--c-primary);color:#fff;}
+  .cta-btn-secondary:hover{background:var(--c-primary-dark);transform:translateY(-1px);box-shadow:0 4px 12px rgba(11,95,255,0.25);}
+  .cta-btn-outline{background:#fff;color:var(--c-text-sub);border:1px solid var(--c-border);}
+  .cta-btn-outline:hover{color:var(--c-primary);border-color:var(--c-primary);}
 
   /* Responsive */
   @media (max-width:720px){
@@ -138,7 +168,15 @@
     .box-scene{flex:0 0 100%;}
     .state-timeline{min-width:100%;}
     .dashboard{padding:0 16px 20px;}
-    .dash-card{padding:14px 28px;}
+    .dash-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+    .dash-card{padding:14px 12px;}
+    .dash-value{font-size:18px;}
+    .value-prop{margin:12px 16px 0;}
+    .value-prop-main{font-size:13px;}
+    .cta-section{padding:0 16px 24px;}
+    .cta-inner{padding:20px 16px;}
+    .cta-buttons{flex-direction:column;}
+    .cta-btn{justify-content:center;}
   }
 </style>
 </head>
@@ -148,14 +186,24 @@
   <div class="logo">BOXERNET</div>
   <h1>つぶすくん Smart Recycle Box</h1>
   <p>IoT 状態遷移マネジメントで、リサイクルインフラを最適化</p>
+
+  <div class="value-prop">
+    <div class="value-prop-main">
+      IoT × 自動圧縮で <b class="accent">回収頻度を最大 50% 削減</b>、容量を <b class="accent">最大 3 倍</b> に。<br>
+      リサイクル現場のオペレーションを丸ごと DX します。
+    </div>
+    <div class="value-prop-sub">※ 想定値（つぶすくん Lite 設計スペック・自社シミュレーション値）</div>
+  </div>
 </div>
 
 <div class="controls">
   <div class="btn-group">
-    <button class="btn btn-reset" onclick="reset()">↺ リセット</button>
-    <button class="btn btn-primary" id="nextBtn" onclick="nextStep()">▶ デモを開始</button>
+    <button class="btn btn-reset" onclick="manualReset()">↺ リセット</button>
+    <button class="btn btn-pause is-playing" id="pauseBtn" onclick="toggleAutoPlay()">⏸ 一時停止</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="manualNext()">▶ デモを開始</button>
   </div>
   <div class="step-counter" id="stepCounter">ステップ 0 / 6</div>
+  <div class="auto-hint" id="autoHint">自動再生中（2.5秒ごとに進行）— 一時停止ボタンで止められます</div>
 </div>
 
 <div class="demo-wrapper">
@@ -258,12 +306,46 @@
 
 <div class="dashboard">
   <div class="dash-title">事業者向け 運用ダッシュボード</div>
-  <div class="dash-note">Boxernet が事業者（自販機オペレーター・収集業者・行政）へ提供する遠隔管理画面のイメージ。一般利用者には表示されません。</div>
+  <div class="dash-note">Boxernet が事業者（自販機オペレーター・収集業者・行政）へ提供する遠隔管理画面のイメージ。一般利用者には表示されません。<br>※ 表示されている数値はすべて想定値（つぶすくん Lite 設計スペック基準）です。</div>
   <div class="dash-grid">
     <div class="dash-card">
+      <span class="est-tag">想定</span>
       <div class="dash-label">本日の投入回数</div>
-      <div class="dash-value" id="dv0">0回</div>
+      <div class="dash-value" id="dv0">0<span class="unit">回</span></div>
       <div class="dash-sub">BOX-001 本日累計</div>
+    </div>
+    <div class="dash-card">
+      <span class="est-tag">想定</span>
+      <div class="dash-label">圧縮効率</div>
+      <div class="dash-value" id="dv1">0<span class="unit">%</span></div>
+      <div class="dash-sub">容量拡張率（最大 200%）</div>
+    </div>
+    <div class="dash-card">
+      <span class="est-tag">想定</span>
+      <div class="dash-label">回収頻度削減</div>
+      <div class="dash-value" id="dv2">0<span class="unit">%</span></div>
+      <div class="dash-sub">従来比（週次回収換算）</div>
+    </div>
+    <div class="dash-card">
+      <span class="est-tag">想定</span>
+      <div class="dash-label">CO2 削減</div>
+      <div class="dash-value" id="dv3">0<span class="unit">kg</span></div>
+      <div class="dash-sub">運搬トラック減便効果</div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section" id="ctaSection">
+  <div class="cta-inner">
+    <div class="cta-title">デモを最後までご覧いただきありがとうございます</div>
+    <div class="cta-desc">
+      Boxernet は、IoT × 自動圧縮で「回収頻度の削減」「容量最大化」「リアルタイム可視化」を同時に実現します。<br>
+      次のステップで、より詳しい資料をご覧いただけます。
+    </div>
+    <div class="cta-buttons">
+      <a href="/invest/" class="cta-btn cta-btn-primary">投資家向け資料を見る</a>
+      <a href="/products/lite/" class="cta-btn cta-btn-secondary">つぶすくん Lite 製品ページ</a>
+      <a href="/business/" class="cta-btn cta-btn-outline">事業内容を見る</a>
     </div>
   </div>
 </div>
@@ -271,6 +353,9 @@
 <script>
 var STEPS = 6;
 var cur = -1;
+var AUTOPLAY_INTERVAL_MS = 2500;
+var autoTimer = null;
+var isAutoPlaying = false;
 
 var C = {
   green:  { iotColor:'#10b981', border:'#0B5FFF', shadow:'rgba(16,185,129,0.18)',  dc:'a-green',  tc:'t-green',  nc:'green'  },
@@ -280,15 +365,17 @@ var C = {
   red:    { iotColor:'#ef4444', border:'#ef4444', shadow:'rgba(239,68,68,0.20)',   dc:'a-red',    tc:'t-red',    nc:'red'    }
 };
 
+// dash: [投入回数, 圧縮効率%, 回収頻度削減%, CO2削減kg]
 var cfg = [
-  { c:C.green,  fill:0,   status:'READY',     slots:'empty',    compress:false, alert:false, shutdown:false, dash:['0回']  },
-  { c:C.green,  fill:55,  status:'DEPOSIT',   slots:'half',     compress:false, alert:false, shutdown:false, dash:['47回'] },
-  { c:C.purple, fill:70,  status:'COMPRESS',  slots:'compress', compress:true,  alert:false, shutdown:false, dash:['47回'] },
-  { c:C.orange, fill:70,  status:'ORDER 70%', slots:'compress', compress:false, alert:true,  shutdown:false, dash:['47回'] },
-  { c:C.red,    fill:100, status:'SHUTDOWN',  slots:'shutdown', compress:false, alert:false, shutdown:true,  dash:['47回'] },
-  { c:C.green,  fill:0,   status:'COLLECTED', slots:'empty',    compress:false, alert:false, shutdown:false, dash:['91回'] }
+  { c:C.green,  fill:0,   status:'READY',     slots:'empty',    compress:false, alert:false, shutdown:false, dash:[0,   0,   0,  0]  },
+  { c:C.green,  fill:55,  status:'DEPOSIT',   slots:'half',     compress:false, alert:false, shutdown:false, dash:[47,  0,   0,  0]  },
+  { c:C.purple, fill:70,  status:'COMPRESS',  slots:'compress', compress:true,  alert:false, shutdown:false, dash:[47,  180, 30, 8]  },
+  { c:C.orange, fill:70,  status:'ORDER 70%', slots:'compress', compress:false, alert:true,  shutdown:false, dash:[47,  180, 40, 12] },
+  { c:C.red,    fill:100, status:'SHUTDOWN',  slots:'shutdown', compress:false, alert:false, shutdown:true,  dash:[47,  200, 45, 14] },
+  { c:C.green,  fill:0,   status:'COLLECTED', slots:'empty',    compress:false, alert:false, shutdown:false, dash:[91,  200, 50, 18] }
 ];
 
+var dashUnits = ['回', '%', '%', 'kg'];
 var slotEmojis = ['🥤','🧴','🥫','🧃'];
 var lineColors = ['c-green','c-green','c-purple','c-orange','c-red'];
 
@@ -296,6 +383,52 @@ function nextStep(){
   cur++;
   if(cur>=STEPS){ reset(); return; }
   apply(cur);
+}
+
+// === 自動再生 ===
+function startAutoPlay(){
+  if(isAutoPlaying) return;
+  // 既にステップ6到達済みなら何もしない（CTA を残す）
+  if(cur >= STEPS - 1) return;
+  isAutoPlaying = true;
+  updatePauseUI();
+  autoTimer = setInterval(function(){
+    if(cur >= STEPS - 1){ stopAutoPlay(); return; }
+    nextStep();
+  }, AUTOPLAY_INTERVAL_MS);
+}
+
+function stopAutoPlay(){
+  if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+  isAutoPlaying = false;
+  updatePauseUI();
+}
+
+function toggleAutoPlay(){
+  if(isAutoPlaying){ stopAutoPlay(); }
+  else { startAutoPlay(); }
+}
+
+function updatePauseUI(){
+  var btn = document.getElementById('pauseBtn');
+  var hint = document.getElementById('autoHint');
+  if(btn){
+    btn.classList.toggle('is-playing', isAutoPlaying);
+    btn.textContent = isAutoPlaying ? '⏸ 一時停止' : '▶ 自動再生';
+  }
+  if(hint){
+    hint.classList.toggle('hidden', !isAutoPlaying);
+  }
+}
+
+// 手動操作 — 自動再生中なら停止してから実行
+function manualNext(){
+  stopAutoPlay();
+  nextStep();
+}
+function manualReset(){
+  stopAutoPlay();
+  reset();
 }
 
 function apply(idx){
@@ -362,6 +495,15 @@ function apply(idx){
       if(ln) ln.classList.add(lineColors[j]||'c-green');
     }
   }
+
+  // 最終ステップでCTAを表示＋自動再生停止
+  var cta = document.getElementById('ctaSection');
+  if(idx === STEPS - 1){
+    stopAutoPlay();
+    setTimeout(function(){ cta.classList.add('visible'); }, 800);
+  } else {
+    cta.classList.remove('visible');
+  }
 }
 
 function triggerDrop(){
@@ -374,8 +516,11 @@ function triggerDrop(){
 }
 
 function animateDash(targets, color){
-  var ids=['dv0'];
-  var prev=ids.map(function(id){return document.getElementById(id).textContent;});
+  var ids=['dv0','dv1','dv2','dv3'];
+  var prev=ids.map(function(id){
+    var t=document.getElementById(id).textContent;
+    return parseFloat(t)||0;
+  });
   var start=performance.now();
   ids.forEach(function(id){document.getElementById(id).style.color=color;});
   (function tick(now){
@@ -383,13 +528,10 @@ function animateDash(targets, color){
     var e=1-Math.pow(1-t,3);
     ids.forEach(function(id,i){
       var el=document.getElementById(id);
-      if(targets[i]==='—'){
-        el.textContent=targets[i]; return;
-      }
-      var pn=parseFloat(prev[i])||0;
-      var tn=parseFloat(targets[i]);
-      var suffix=targets[i].replace(/[\d.]/g,'');
-      el.textContent=Math.round(pn+(tn-pn)*e)+suffix;
+      var pn=prev[i];
+      var tn=targets[i];
+      var curVal=Math.round(pn+(tn-pn)*e);
+      el.innerHTML=curVal+'<span class="unit">'+dashUnits[i]+'</span>';
     });
     if(t<1) requestAnimationFrame(tick);
   })(start);
@@ -417,7 +559,7 @@ function reset(){
   }
   var nets=['net1','net2','net3'];
   for(var n=0;n<nets.length;n++) document.getElementById(nets[n]).className='network-line';
-  animateDash(['0回'],'#10b981');
+  animateDash([0,0,0,0],'#10b981');
   for(var j=0;j<STEPS;j++){
     document.getElementById('dot'+j).className='step-dot'+(j===0?' a-green':'');
     document.getElementById('nm'+j).className='step-name'+(j===0?' on':'');
@@ -425,9 +567,46 @@ function reset(){
     var ln=document.getElementById('ln'+j);
     if(ln) ln.className='step-line';
   }
+  document.getElementById('ctaSection').classList.remove('visible');
 }
 
-window.onload=reset;
+// 初回ロード時：リセット後 1.2秒 待ってから自動再生を開始
+window.onload = function(){
+  reset();
+  // 「⏸ 一時停止」ボタンを初期表示（自動再生開始予定の合図）
+  isAutoPlaying = false;
+  updatePauseUI();
+  setTimeout(function(){
+    // ページが非アクティブ or 既に手動操作されていたら起動しない
+    if(cur === -1 && !document.hidden){
+      startAutoPlay();
+    }
+  }, 1200);
+};
+
+// === 親ページへ高さを通知（iframe 自動リサイズ用） ===
+(function(){
+  function postHeight(){
+    var h = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight
+    );
+    if(window.parent && window.parent !== window){
+      window.parent.postMessage({ source:'tsubusukun-demo', type:'resize', height:h }, '*');
+    }
+  }
+  // ResizeObserver で body の高さ変化を検知
+  if(typeof ResizeObserver !== 'undefined'){
+    new ResizeObserver(postHeight).observe(document.body);
+  }
+  // フォールバック: 定期送信 & 主要トリガー
+  window.addEventListener('load', postHeight);
+  window.addEventListener('resize', postHeight);
+  setTimeout(postHeight, 300);
+  setTimeout(postHeight, 1200);
+})();
 </script>
 </body>
 </html>

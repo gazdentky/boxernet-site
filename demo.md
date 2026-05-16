@@ -20,9 +20,10 @@ lead: 投入から回収完了までの 6 ステップを、IoT センサーと�
   }
   .demo-frame{
     width:100%;
-    height:880px;
+    height:1200px;
     border:0;
     display:block;
+    transition:height 0.3s ease;
   }
   .demo-caption{
     text-align:center;
@@ -62,9 +63,23 @@ lead: 投入から回収完了までの 6 ステップを、IoT センサーと�
     line-height:1.7;
   }
   @media (max-width:720px){
-    .demo-frame{ height:1280px; }
+    .demo-frame{ height:1780px; }
   }
 </style>
+
+<script>
+  // iframe 内のデモから高さ通知を受信して自動リサイズ
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if(d && d.source === 'tsubusukun-demo' && d.type === 'resize' && typeof d.height === 'number'){
+      var iframes = document.querySelectorAll('iframe.demo-frame');
+      iframes.forEach(function(f){
+        // 最小値は CSS の固定高さを保つ（下振れ防止）
+        f.style.height = Math.max(d.height + 20, 600) + 'px';
+      });
+    }
+  });
+</script>
 
 ## 体験の流れ
 
