@@ -1,0 +1,832 @@
+---
+layout: default
+title: つぶすくん｜安全思想 - リチウムイオン電池対策の4段防護
+description: つぶすくんは「発火させない・拡大させない・自然に鎮める」の優先順位で、リチウムイオン電池混入時の4段防護を実現。投入口での検知、3層封じ込め、独立3系統センサ、パッシブ延焼遮断による物理ベースの安全設計を解説します。
+permalink: /products/tsubusukun/safety/
+og_title: つぶすくん｜安全思想 - リチウムイオン電池対策の4段防護
+og_description: つぶすくんは「発火させない・拡大させない・自然に鎮める」の優先順位で、リチウムイオン電池混入時の4段防護を実現。
+---
+
+<style>
+/* つぶすくん 安全思想ページ専用スタイル (CSSセレクタは .tsubusukun-safety にスコープ済み: Jekyllレイアウトの既存スタイルと衝突しません) */
+
+  :root {
+    --bn-navy: #0a1929;
+    --bn-blue: #1f3864;
+    --bn-cyan: #2e75b6;
+    --bn-light: #f5f7fa;
+    --bn-accent: #ff7a1a;
+    --bn-yellow: #ffb74d;
+    --bn-red: #e53935;
+    --bn-green: #2e7d32;
+    --bn-text: #1a2530;
+    --bn-muted: #5a6a7a;
+    --bn-border: #e0e6ec;
+  }
+  .tsubusukun-safety, .tsubusukun-safety * { box-sizing: border-box; }
+  .tsubusukun-safety {
+    font-family: "Yu Gothic", "游ゴシック", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    color: var(--bn-text);
+    line-height: 1.75;
+    margin: 0;
+    background: #fff;
+  }
+
+  .tsubusukun-safety .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  .tsubusukun-safety .section { padding: 80px 0; }
+
+  .tsubusukun-safety .section-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    font-weight: 700;
+    color: var(--bn-cyan);
+    background: #e8f1fa;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+
+  .tsubusukun-safety .section-title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 16px;
+    color: var(--bn-navy);
+  }
+
+  .tsubusukun-safety .section-lead {
+    font-size: 16px;
+    color: var(--bn-muted);
+    margin: 0 0 48px;
+    max-width: 780px;
+  }
+
+  .tsubusukun-safety h3.block-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bn-navy);
+    margin: 0 0 16px;
+  }
+
+  .tsubusukun-safety .safety-hero {
+    background: linear-gradient(135deg, #0a1929 0%, #1f3864 60%, #2e75b6 100%);
+    color: #fff;
+    padding: 72px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tsubusukun-safety .safety-hero::before {
+    content: "";
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(255,183,77,0.18) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .tsubusukun-safety .safety-hero .section-eyebrow {
+    background: rgba(255,255,255,0.14);
+    color: #ffb74d;
+  }
+
+  .tsubusukun-safety .safety-hero .section-title { color: #fff; font-size: 40px; max-width: 760px; position: relative; }
+
+  .tsubusukun-safety .safety-hero .section-title span { color: #ffb74d; }
+
+  .tsubusukun-safety .safety-hero .section-lead { color: rgba(255,255,255,0.82); max-width: 760px; margin-bottom: 0; position: relative; }
+
+  .tsubusukun-safety .priority-section { background: var(--bn-light); }
+
+  .tsubusukun-safety .priority-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .tsubusukun-safety .priority-text p { font-size: 15px; color: var(--bn-text); }
+
+  .tsubusukun-safety .priority-quote {
+    border-left: 4px solid var(--bn-accent);
+    padding: 12px 0 12px 20px;
+    margin: 24px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bn-navy);
+    line-height: 1.6;
+  }
+
+  .tsubusukun-safety .priority-quote small {
+    display: block;
+    font-size: 13px;
+    color: var(--bn-muted);
+    font-weight: 400;
+    margin-top: 6px;
+  }
+
+  .tsubusukun-safety .defense-section { background: #fff; }
+
+  .tsubusukun-safety .defense-diagram {
+    background: #f8fafc;
+    border: 1px solid var(--bn-border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 48px;
+  }
+
+  .tsubusukun-safety .stage-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .tsubusukun-safety .stage-card {
+    background: #fff;
+    border: 1px solid var(--bn-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(10,25,41,0.04);
+    transition: box-shadow 0.2s;
+  }
+
+  .tsubusukun-safety .stage-card:hover { box-shadow: 0 4px 20px rgba(10,25,41,0.1); }
+
+  .tsubusukun-safety .stage-card-header {
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 24px;
+    align-items: center;
+    padding: 24px 32px;
+    background: linear-gradient(90deg, #f5f9fc 0%, #fff 100%);
+    border-bottom: 1px solid var(--bn-border);
+  }
+
+  .tsubusukun-safety .stage-num {
+    width: 80px; height: 80px;
+    background: var(--bn-navy);
+    color: #ffb74d;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; font-weight: 700;
+    font-family: "Helvetica Neue", sans-serif;
+  }
+
+  .tsubusukun-safety .stage-card.stage-1 .stage-num { background: var(--bn-cyan); color: #fff; }
+
+  .tsubusukun-safety .stage-card.stage-2 .stage-num { background: var(--bn-blue); color: #fff; }
+
+  .tsubusukun-safety .stage-card.stage-3 .stage-num { background: var(--bn-accent); color: #fff; }
+
+  .tsubusukun-safety .stage-card.stage-4 .stage-num { background: var(--bn-navy); color: #ffb74d; }
+
+  .tsubusukun-safety .stage-title-wrap h3 {
+    font-size: 22px; font-weight: 700; color: var(--bn-navy);
+    margin: 0 0 4px;
+  }
+
+  .tsubusukun-safety .stage-title-wrap p.role {
+    font-size: 13px; color: var(--bn-muted); margin: 0;
+    letter-spacing: 0.04em;
+  }
+
+  .tsubusukun-safety .stage-badge {
+    background: #e8f5e9; color: var(--bn-green);
+    font-size: 12px; font-weight: 700;
+    padding: 6px 12px; border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  .tsubusukun-safety .stage-card.stage-1 .stage-badge { background: #e3f2fd; color: var(--bn-cyan); }
+
+  .tsubusukun-safety .stage-card.stage-3 .stage-badge { background: #fff3e0; color: var(--bn-accent); }
+
+  .tsubusukun-safety .stage-card.stage-4 .stage-badge { background: #fff8e1; color: #f57c00; }
+
+  .stage-.tsubusukun-safety {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    padding: 28px 32px;
+  }
+
+  .tsubusukun-safety .stage-illust {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 220px;
+  }
+
+  .tsubusukun-safety .stage-illust svg { width: 100%; height: auto; max-height: 220px; }
+
+  .tsubusukun-safety .stage-detail h4 {
+    font-size: 14px; font-weight: 700;
+    color: var(--bn-muted); margin: 0 0 8px;
+    letter-spacing: 0.06em;
+  }
+
+  .tsubusukun-safety .stage-detail p { font-size: 14.5px; margin: 0 0 16px; color: var(--bn-text); }
+
+  .tsubusukun-safety .stage-detail ul {
+    list-style: none; padding: 0; margin: 0 0 16px;
+  }
+
+  .tsubusukun-safety .stage-detail ul li {
+    position: relative;
+    padding: 6px 0 6px 24px;
+    font-size: 14px;
+    border-bottom: 1px dashed var(--bn-border);
+  }
+
+  .tsubusukun-safety .stage-detail ul li:last-child { border-bottom: none; }
+
+  .tsubusukun-safety .stage-detail ul li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 14px;
+    width: 8px; height: 8px;
+    border-right: 2px solid var(--bn-accent);
+    border-bottom: 2px solid var(--bn-accent);
+    transform: rotate(-45deg);
+  }
+
+  .tsubusukun-safety .rationale-section {
+    background: var(--bn-light);
+  }
+
+  .tsubusukun-safety .rationale-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .tsubusukun-safety .rationale-card {
+    background: #fff;
+    border-left: 4px solid var(--bn-cyan);
+    padding: 24px 28px;
+    border-radius: 4px;
+  }
+
+  .tsubusukun-safety .rationale-card h4 {
+    font-size: 16px; font-weight: 700; margin: 0 0 12px;
+    color: var(--bn-navy);
+  }
+
+  .tsubusukun-safety .rationale-card p { font-size: 14px; margin: 0; color: var(--bn-text); }
+
+  .tsubusukun-safety .rationale-card .num {
+    display: inline-block; font-size: 28px; font-weight: 700;
+    color: var(--bn-accent); margin-right: 8px;
+    font-family: "Helvetica Neue", sans-serif;
+  }
+
+  .tsubusukun-safety .spec-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 24px;
+    background: #fff;
+    border: 1px solid var(--bn-border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .tsubusukun-safety .spec-table th, .tsubusukun-safety .spec-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--bn-border);
+    font-size: 14px;
+  }
+
+  .tsubusukun-safety .spec-table th {
+    background: var(--bn-navy);
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .tsubusukun-safety .spec-table tr:last-child td { border-bottom: none; }
+
+  .tsubusukun-safety .spec-table tr:nth-child(even) td { background: #fafbfc; }
+
+  .tsubusukun-safety .spec-table .accent { color: var(--bn-accent); font-weight: 700; }
+
+  .tsubusukun-safety .cta-section {
+    background: linear-gradient(135deg, var(--bn-navy) 0%, var(--bn-blue) 100%);
+    color: #fff;
+    text-align: center;
+    padding: 64px 0;
+  }
+
+  .tsubusukun-safety .cta-section h2 { color: #fff; font-size: 28px; margin: 0 0 16px; }
+
+  .tsubusukun-safety .cta-section p { color: rgba(255,255,255,0.82); font-size: 15px; max-width: 640px; margin: 0 auto 28px; }
+
+  .tsubusukun-safety .cta-button {
+    display: inline-block;
+    background: var(--bn-accent);
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .tsubusukun-safety .cta-button:hover { background: #e8650d; }
+
+  @media (max-width: 768px)  {.tsubusukun-safety .priority-wrap { grid-template-columns: 1fr; }
+
+  .tsubusukun-safety .stage-card-header { grid-template-columns: 60px 1fr; padding: 18px 20px; gap: 16px; }
+
+  .tsubusukun-safety .stage-num { width: 56px; height: 56px; font-size: 24px; }
+
+  .tsubusukun-safety .stage-badge { grid-column: 1 / -1; justify-self: start; }
+    .stage-.tsubusukun-safety { grid-template-columns: 1fr; padding: 20px; }
+
+  .tsubusukun-safety .rationale-grid { grid-template-columns: 1fr; }
+
+  .tsubusukun-safety .section-title { font-size: 26px; }
+
+  .tsubusukun-safety .safety-hero .section-title { font-size: 30px; }
+  }
+
+  /* 製品ページ間サブメニュー */
+  .tsubusukun-safety .ts-subnav{
+    display:flex;flex-wrap:wrap;gap:8px;
+    padding:14px 18px;margin:0 0 24px;
+    background:#f5f7fa;border:1px solid #e0e6ec;border-radius:12px;
+    font-size:13px;
+    font-family:"Yu Gothic","游ゴシック","Hiragino Kaku Gothic ProN","Meiryo",sans-serif;
+  }
+  .tsubusukun-safety .ts-subnav-label{
+    color:#5a6a7a;font-weight:600;letter-spacing:.05em;
+    padding:6px 4px;margin-right:4px;
+  }
+  .tsubusukun-safety .ts-subnav a{
+    display:inline-block;padding:6px 14px;border-radius:999px;
+    background:#fff;color:#0B5FFF;border:1px solid #e0e6ec;
+    text-decoration:none;font-weight:600;transition:all .2s;
+  }
+  .tsubusukun-safety .ts-subnav a:hover{background:#0B5FFF;color:#fff;border-color:#0B5FFF;}
+  .tsubusukun-safety .ts-subnav a.is-current{background:#0B5FFF;color:#fff;border-color:#0B5FFF;cursor:default;}
+  @media (max-width:480px){
+    .tsubusukun-safety .ts-subnav{font-size:12px;padding:12px;}
+    .tsubusukun-safety .ts-subnav-label{width:100%;margin:0 0 4px;}
+  }
+
+</style>
+<div class="tsubusukun-safety">
+
+<nav class="ts-subnav" aria-label="製品メニュー">
+  <span class="ts-subnav-label">製品</span>
+  <a href="{{ '/products/lite/' | relative_url }}">Boxernet Lite</a>
+  <a href="{{ '/products/tsubusukun/safety/' | relative_url }}" class="is-current" aria-current="page">つぶすくん Standard 安全設計</a>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="safety-hero">
+  <div class="container">
+    <span class="section-eyebrow">Safety Philosophy</span>
+    <h1 class="section-title">捨てる安心まで、<br>つぶすくんの責任です。<br><span>リチウムイオン電池混入時の4段防護。</span></h1>
+    <p class="section-lead">PETボトル回収機におけるリチウムイオン電池の誤投入は、業界共通の最も重要な安全課題です。Boxernet は「発火させない・拡大させない・自然に鎮める」という3段階の優先順位を設計の中心に据え、コストではなく確率と物理に基づいた防護体系を構築しました。</p>
+  </div>
+</section>
+
+<!-- ===== 優先順位 ===== -->
+<section class="section priority-section">
+  <div class="container">
+    <span class="section-eyebrow">Design Philosophy</span>
+    <h2 class="section-title">「消火する」より「発火させない」</h2>
+    <p class="section-lead">回収機の防火対策は、消火器や窒素ボンベなど能動的な仕掛けに目が行きがちです。しかし統計的に火災を防ぐ最大の効果は、そもそも電池を機内に入れないこと、入っても燃え広がらないことにあります。Boxernet は次の優先順位で投資配分を決定しています。</p>
+
+    <div class="priority-wrap">
+      <div class="priority-text">
+        <div class="priority-quote">
+          1. 発火させない (Prevention)<br>
+          2. 拡大させない (Containment)<br>
+          3. 消火する (Suppression)
+          <small>— 上位ほど発生確率を下げる効果が大きく、コスト対効果に優れる。</small>
+        </div>
+        <p>同サイズの圧縮機構では、能動消火 (窒素パージ・防爆ベント・専用バックアップ電池等) は1台あたり約4万円の追加コストになります。一方、入口での検知ゲートと多層封じ込めだけで Li-ion 1セル相当の熱暴走エネルギー (約11 kJ) を物理的に自然鎮静できることが評価で確認できました。</p>
+        <p>つぶすくんは能動消火を意図的に廃し、検知と封じ込めへ資源を集中することで、より安全で、より導入しやすい機械を実現しています。</p>
+      </div>
+      <div class="priority-illust">
+        <svg viewBox="0 0 400 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="安全対策の優先順位ピラミッド">
+          <!-- Pyramid -->
+          <polygon points="200,40 90,140 310,140" fill="#2e75b6" opacity="0.9"/>
+          <polygon points="90,140 310,140 60,250 340,250" fill="#1f3864" opacity="0.9"/>
+          <polygon points="60,250 340,250 30,340 370,340" fill="#0a1929" opacity="0.9"/>
+          <!-- Labels -->
+          <text x="200" y="100" font-family="Yu Gothic" font-weight="700" font-size="16" fill="#ffb74d" text-anchor="middle">発火させない</text>
+          <text x="200" y="120" font-family="Yu Gothic" font-size="11" fill="#fff" text-anchor="middle">Prevention</text>
+          <text x="200" y="195" font-family="Yu Gothic" font-weight="700" font-size="16" fill="#ffb74d" text-anchor="middle">拡大させない</text>
+          <text x="200" y="215" font-family="Yu Gothic" font-size="11" fill="#fff" text-anchor="middle">Containment</text>
+          <text x="200" y="298" font-family="Yu Gothic" font-weight="700" font-size="14" fill="#ffb74d" text-anchor="middle">消火する</text>
+          <text x="200" y="316" font-family="Yu Gothic" font-size="10" fill="rgba(255,255,255,0.7)" text-anchor="middle">Suppression (本機では非搭載)</text>
+          <!-- Arrow -->
+          <line x1="380" y1="50" x2="380" y2="330" stroke="#5a6a7a" stroke-width="2" marker-end="url(#arr1)"/>
+          <defs>
+            <marker id="arr1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+              <polygon points="0,0 10,5 0,10" fill="#5a6a7a"/>
+            </marker>
+          </defs>
+          <text x="392" y="190" font-family="Yu Gothic" font-size="11" fill="#5a6a7a" writing-mode="tb">投資配分</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 4段防護 ===== -->
+<section class="section defense-section">
+  <div class="container">
+    <span class="section-eyebrow">4-Stage Defense</span>
+    <h2 class="section-title">4段で守る。<br>万一発火しても、外には出さない。</h2>
+    <p class="section-lead">1段目で投入を拒む、2段目で物理的に閉じ込める、3段目で異常を即座に検知し動かさない、4段目で延焼を遮る。すべての段は独立して機能するよう設計されており、メイン基板が停止していても主電源は遮断されます。</p>
+
+    <!-- メイン断面図 -->
+    <div class="defense-diagram">
+      <svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="つぶすくんの4段防護断面図">
+        <!-- 筐体外枠 -->
+        <rect x="280" y="30" width="440" height="400" rx="12" fill="#ffffff" stroke="#1f3864" stroke-width="3"/>
+        <rect x="280" y="30" width="440" height="40" rx="12" fill="#1f3864"/>
+        <text x="500" y="55" font-family="Yu Gothic" font-weight="700" font-size="14" fill="#ffb74d" text-anchor="middle">つぶすくん TSB-P2 (前面断面)</text>
+
+        <!-- 投入口 + Stage 1 -->
+        <rect x="430" y="80" width="140" height="50" rx="6" fill="#e3f2fd" stroke="#2e75b6" stroke-width="2"/>
+        <text x="500" y="103" font-family="Yu Gothic" font-weight="700" font-size="12" fill="#1f3864" text-anchor="middle">投入口</text>
+        <text x="500" y="120" font-family="Yu Gothic" font-size="10" fill="#5a6a7a" text-anchor="middle">金属検知 + 重量チェック</text>
+
+        <!-- Stage 1 ラベル -->
+        <circle cx="370" cy="105" r="22" fill="#2e75b6"/>
+        <text x="370" y="111" font-family="Helvetica" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">1</text>
+        <text x="370" y="148" font-family="Yu Gothic" font-size="11" fill="#2e75b6" text-anchor="middle" font-weight="700">投入口拒否</text>
+
+        <!-- 圧縮室 (多層) Stage 2 -->
+        <rect x="380" y="155" width="240" height="120" fill="#0a1929"/>
+        <rect x="386" y="161" width="228" height="108" fill="#ffeb3b" opacity="0.3"/>
+        <rect x="392" y="167" width="216" height="96" fill="#e0e0e0"/>
+        <text x="500" y="200" font-family="Yu Gothic" font-weight="700" font-size="13" fill="#0a1929" text-anchor="middle">圧縮室</text>
+        <text x="500" y="220" font-family="Yu Gothic" font-size="10" fill="#5a6a7a" text-anchor="middle">SUS316L t=2.0mm</text>
+        <text x="500" y="234" font-family="Yu Gothic" font-size="10" fill="#5a6a7a" text-anchor="middle">+ セラミック t=6mm</text>
+        <text x="500" y="248" font-family="Yu Gothic" font-size="10" fill="#5a6a7a" text-anchor="middle">+ SPCC t=2.0mm</text>
+        <!-- 多層引き出し線 -->
+        <line x1="380" y1="155" x2="260" y2="155" stroke="#1f3864" stroke-width="1"/>
+        <text x="255" y="148" font-family="Yu Gothic" font-size="10" fill="#1f3864" text-anchor="end">外側 SPCC</text>
+        <line x1="386" y1="161" x2="260" y2="170" stroke="#1f3864" stroke-width="1"/>
+        <text x="255" y="174" font-family="Yu Gothic" font-size="10" fill="#1f3864" text-anchor="end">セラミックファイバ</text>
+        <line x1="392" y1="167" x2="260" y2="190" stroke="#1f3864" stroke-width="1"/>
+        <text x="255" y="194" font-family="Yu Gothic" font-size="10" fill="#1f3864" text-anchor="end">SUS316L (耐熱350°C)</text>
+
+        <!-- Stage 2 ラベル -->
+        <circle cx="370" cy="215" r="22" fill="#1f3864"/>
+        <text x="370" y="221" font-family="Helvetica" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">2</text>
+
+        <!-- センサー Stage 3 -->
+        <circle cx="410" cy="185" r="8" fill="#ff7a1a"/>
+        <text x="410" y="189" font-family="Yu Gothic" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">T</text>
+        <circle cx="590" cy="185" r="8" fill="#ff7a1a"/>
+        <text x="590" y="189" font-family="Yu Gothic" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">T</text>
+        <circle cx="500" cy="170" r="8" fill="#e53935"/>
+        <text x="500" y="174" font-family="Yu Gothic" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">煙</text>
+        <text x="640" y="180" font-family="Yu Gothic" font-size="10" fill="#ff7a1a" font-weight="700">熱電対 (120°C停止)</text>
+        <text x="640" y="195" font-family="Yu Gothic" font-size="10" fill="#e53935" font-weight="700">煙センサ</text>
+        <text x="640" y="210" font-family="Yu Gothic" font-size="10" fill="#5a6a7a">電流監視 (モータ拘束)</text>
+
+        <!-- Stage 3 ラベル -->
+        <circle cx="370" cy="275" r="22" fill="#ff7a1a"/>
+        <text x="370" y="281" font-family="Helvetica" font-weight="700" font-size="18" fill="#fff" text-anchor="middle">3</text>
+
+        <!-- 残渣カートリッジ + 隔壁 -->
+        <rect x="380" y="295" width="160" height="115" fill="#fff" stroke="#1f3864" stroke-width="2"/>
+        <text x="460" y="350" font-family="Yu Gothic" font-weight="700" font-size="12" fill="#1f3864" text-anchor="middle">残渣カートリッジ</text>
+        <text x="460" y="368" font-family="Yu Gothic" font-size="10" fill="#5a6a7a" text-anchor="middle">60 L (PET圧縮済)</text>
+        <text x="460" y="386" font-family="Yu Gothic" font-size="10" fill="#5a6a7a" text-anchor="middle">SUS網ライナ</text>
+
+        <!-- 廃液カートリッジ (独立区画) -->
+        <line x1="540" y1="295" x2="540" y2="410" stroke="#e53935" stroke-width="2" stroke-dasharray="4,2"/>
+        <rect x="550" y="295" width="70" height="115" fill="#e3f2fd" stroke="#1f3864" stroke-width="2"/>
+        <text x="585" y="345" font-family="Yu Gothic" font-weight="700" font-size="11" fill="#1f3864" text-anchor="middle">廃液</text>
+        <text x="585" y="360" font-family="Yu Gothic" font-weight="700" font-size="11" fill="#1f3864" text-anchor="middle">カートリッジ</text>
+        <text x="585" y="378" font-family="Yu Gothic" font-size="9" fill="#5a6a7a" text-anchor="middle">8 L</text>
+        <text x="585" y="392" font-family="Yu Gothic" font-size="9" fill="#5a6a7a" text-anchor="middle">独立区画</text>
+
+        <!-- セラミックブランケット (圧縮室と残渣の間) -->
+        <rect x="380" y="285" width="240" height="10" fill="#ff7a1a" opacity="0.5"/>
+        <text x="640" y="293" font-family="Yu Gothic" font-size="9" fill="#ff7a1a" font-weight="700">セラミックブランケット t=5mm</text>
+
+        <!-- Stage 4 ラベル -->
+        <circle cx="370" cy="350" r="22" fill="#0a1929"/>
+        <text x="370" y="356" font-family="Helvetica" font-weight="700" font-size="18" fill="#ffb74d" text-anchor="middle">4</text>
+        <text x="370" y="385" font-family="Yu Gothic" font-size="11" fill="#0a1929" text-anchor="middle" font-weight="700">延焼遮断</text>
+
+        <!-- パッシブベント (背面上方) -->
+        <polygon points="700,80 730,80 715,55" fill="#ffb74d"/>
+        <text x="752" y="75" font-family="Yu Gothic" font-size="10" fill="#1f3864" font-weight="700">パッシブ</text>
+        <text x="752" y="90" font-family="Yu Gothic" font-size="10" fill="#1f3864" font-weight="700">圧力リリーフ</text>
+        <text x="752" y="104" font-family="Yu Gothic" font-size="9" fill="#5a6a7a">(背面上方排気)</text>
+
+        <!-- 通信筐体 ASA樹脂 -->
+        <rect x="290" y="40" width="60" height="30" rx="4" fill="#f5f7fa" stroke="#5a6a7a" stroke-width="1.5" stroke-dasharray="3,2"/>
+        <text x="320" y="58" font-family="Yu Gothic" font-size="9" fill="#5a6a7a" text-anchor="middle" font-weight="700">ASA樹脂</text>
+        <text x="320" y="68" font-family="Yu Gothic" font-size="8" fill="#5a6a7a" text-anchor="middle">通信窓</text>
+
+        <!-- 凡例 -->
+        <rect x="40" y="350" width="200" height="80" fill="#f8fafc" stroke="#e0e6ec"/>
+        <text x="50" y="368" font-family="Yu Gothic" font-size="11" fill="#1f3864" font-weight="700">凡例</text>
+        <circle cx="58" cy="385" r="6" fill="#ff7a1a"/>
+        <text x="70" y="389" font-family="Yu Gothic" font-size="10" fill="#1a2530">T = 熱電対 (圧縮室温度)</text>
+        <circle cx="58" cy="403" r="6" fill="#e53935"/>
+        <text x="70" y="407" font-family="Yu Gothic" font-size="10" fill="#1a2530">煙 = 光電式煙センサ</text>
+        <line x1="50" y1="421" x2="66" y2="421" stroke="#e53935" stroke-width="2" stroke-dasharray="4,2"/>
+        <text x="70" y="425" font-family="Yu Gothic" font-size="10" fill="#1a2530">独立区画隔壁</text>
+      </svg>
+    </div>
+
+    <!-- 4段カード -->
+    <div class="stage-grid">
+
+      <!-- Stage 1 -->
+      <article class="stage-card stage-1">
+        <header class="stage-card-header">
+          <div class="stage-num">1</div>
+          <div class="stage-title-wrap">
+            <h3>投入口で識別・拒否する</h3>
+            <p class="role">最も発火確率を下げる主防御線 / Prevention</p>
+          </div>
+          <span class="stage-badge">主防御線</span>
+        </header>
+        <div class="stage-body">
+          <div class="stage-illust">
+            <svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="投入口での金属検知">
+              <rect x="60" y="20" width="120" height="60" rx="8" fill="#e3f2fd" stroke="#2e75b6" stroke-width="2"/>
+              <text x="120" y="55" font-family="Yu Gothic" font-size="11" fill="#1f3864" text-anchor="middle" font-weight="700">投入口</text>
+              <!-- 渦電流コイル -->
+              <ellipse cx="120" cy="95" rx="55" ry="10" fill="none" stroke="#ff7a1a" stroke-width="2"/>
+              <ellipse cx="120" cy="95" rx="55" ry="10" fill="none" stroke="#ff7a1a" stroke-width="2" opacity="0.4" transform="translate(0,4)"/>
+              <text x="186" y="98" font-family="Yu Gothic" font-size="10" fill="#ff7a1a" font-weight="700">渦電流コイル</text>
+              <!-- ロードセル -->
+              <rect x="100" y="115" width="40" height="14" fill="#5a6a7a"/>
+              <text x="186" y="125" font-family="Yu Gothic" font-size="10" fill="#5a6a7a">ロードセル</text>
+              <!-- PET (OK) -->
+              <ellipse cx="50" cy="170" rx="14" ry="22" fill="#b3e5fc" stroke="#2e75b6"/>
+              <text x="50" y="205" font-family="Yu Gothic" font-size="10" fill="#2e7d32" text-anchor="middle" font-weight="700">PET OK</text>
+              <text x="50" y="178" font-family="Yu Gothic" font-size="9" fill="#1f3864" text-anchor="middle">25g</text>
+              <!-- Li-ion (NG) -->
+              <rect x="160" y="150" width="20" height="40" rx="2" fill="#666"/>
+              <rect x="166" y="146" width="8" height="4" fill="#999"/>
+              <text x="170" y="205" font-family="Yu Gothic" font-size="10" fill="#e53935" text-anchor="middle" font-weight="700">Li-ion 拒否</text>
+              <text x="170" y="178" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle">45g+</text>
+              <!-- Arrows -->
+              <path d="M50,138 Q50,100 80,90" stroke="#2e7d32" stroke-width="2" fill="none" marker-end="url(#a1)"/>
+              <path d="M170,138 Q170,100 160,90" stroke="#e53935" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+              <line x1="155" y1="100" x2="178" y2="80" stroke="#e53935" stroke-width="3"/>
+              <line x1="178" y1="100" x2="155" y2="80" stroke="#e53935" stroke-width="3"/>
+              <defs>
+                <marker id="a1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <polygon points="0,0 8,4 0,8" fill="#2e7d32"/>
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <div class="stage-detail">
+            <h4>仕組み</h4>
+            <p>投入シュート内に組み込んだ渦電流式金属検知センサと、ロードセルによる重量チェックの二重判定で、リチウムイオン電池を機械的に拒否します。検知した瞬間にソレノイドゲートが閉鎖し、LED アラームと管理アプリへ通知が送られます。</p>
+            <h4>具体仕様</h4>
+            <ul>
+              <li>渦電流コイル感度: 直径10mm以上の導電体を検知 (18650 単セルも捕捉)</li>
+              <li>重量判定: PET 空 25±10g vs Li-ion 18650セル ≥45g で識別</li>
+              <li>検知時の動作: ゲート閉鎖 + LED赤点滅 + LTE-M経由でアプリ即時通知</li>
+              <li>利用者啓発: 「Li-ion投入禁止」表示ステッカー標準添付</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Stage 2 -->
+      <article class="stage-card stage-2">
+        <header class="stage-card-header">
+          <div class="stage-num">2</div>
+          <div class="stage-title-wrap">
+            <h3>万一通り抜けても、閉じ込める</h3>
+            <p class="role">3層構造の物理的封じ込め / Containment</p>
+          </div>
+          <span class="stage-badge">封じ込め</span>
+        </header>
+        <div class="stage-body">
+          <div class="stage-illust">
+            <svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="圧縮室の3層構造">
+              <!-- 外層 SPCC -->
+              <rect x="40" y="40" width="160" height="140" fill="#0a1929"/>
+              <!-- セラミック -->
+              <rect x="55" y="55" width="130" height="110" fill="#ffeb3b" opacity="0.7"/>
+              <!-- SUS316L -->
+              <rect x="70" y="70" width="100" height="80" fill="#e0e0e0"/>
+              <!-- 発火源 -->
+              <circle cx="120" cy="110" r="14" fill="#e53935"/>
+              <text x="120" y="114" font-family="Yu Gothic" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">発火</text>
+              <!-- 引き出し -->
+              <line x1="40" y1="40" x2="20" y2="20" stroke="#0a1929" stroke-width="1"/>
+              <text x="18" y="18" font-family="Yu Gothic" font-size="9" fill="#0a1929" text-anchor="end">SPCC</text>
+              <text x="18" y="28" font-family="Yu Gothic" font-size="8" fill="#5a6a7a" text-anchor="end">溶融1500°C</text>
+
+              <line x1="55" y1="55" x2="220" y2="30" stroke="#fbc02d" stroke-width="1"/>
+              <text x="225" y="28" font-family="Yu Gothic" font-size="9" fill="#fbc02d">セラミックファイバ</text>
+              <text x="225" y="38" font-family="Yu Gothic" font-size="8" fill="#5a6a7a">耐熱1000°C / t=6mm</text>
+
+              <line x1="70" y1="70" x2="220" y2="200" stroke="#5a6a7a" stroke-width="1"/>
+              <text x="225" y="200" font-family="Yu Gothic" font-size="9" fill="#5a6a7a">SUS316L</text>
+              <text x="225" y="210" font-family="Yu Gothic" font-size="8" fill="#5a6a7a">耐熱350°C / t=2mm</text>
+            </svg>
+          </div>
+          <div class="stage-detail">
+            <h4>仕組み</h4>
+            <p>圧縮室は内側から SUS316L (耐熱350°C) → セラミックファイバ (耐熱1000°C) → SPCC隔壁 (溶融1500°C) の3層で構成。Li-ion 1セルの熱暴走エネルギー (約11 kJ) による圧縮室内理論最高温度 約450°C に対して、層構造全体で十分な耐熱マージンを確保しています。</p>
+            <h4>具体仕様</h4>
+            <ul>
+              <li>一次封じ込め: SUS316L ライナ t=2.0 mm (耐熱350°C)</li>
+              <li>断熱層: セラミックファイバ t=6 mm (耐熱1000°C, 熱伝導率0.06 W/m·K)</li>
+              <li>二次封じ込め: SPCC隔壁 t=2.0 mm + 防火塗装</li>
+              <li>パッキン: シリコン難燃グレード UL94 V-0</li>
+              <li>外装: SUS304 t=2.0 mm + 焼付塗装 RAL9005</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Stage 3 -->
+      <article class="stage-card stage-3">
+        <header class="stage-card-header">
+          <div class="stage-num">3</div>
+          <div class="stage-title-wrap">
+            <h3>異変を察知し、動かさない</h3>
+            <p class="role">三重独立センサと強制電源遮断 / Detection</p>
+          </div>
+          <span class="stage-badge">早期検知</span>
+        </header>
+        <div class="stage-body">
+          <div class="stage-illust">
+            <svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三重独立センサ">
+              <!-- 中央: ハードワイヤードOR論理 -->
+              <rect x="80" y="90" width="80" height="40" rx="6" fill="#0a1929"/>
+              <text x="120" y="108" font-family="Yu Gothic" font-size="10" fill="#ffb74d" text-anchor="middle" font-weight="700">HW OR論理</text>
+              <text x="120" y="122" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle">主電源強制遮断</text>
+
+              <!-- 熱電対 -->
+              <circle cx="40" cy="50" r="22" fill="#ff7a1a"/>
+              <text x="40" y="48" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">熱電対</text>
+              <text x="40" y="60" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle">120°C</text>
+              <line x1="55" y1="65" x2="85" y2="95" stroke="#ff7a1a" stroke-width="2"/>
+
+              <!-- 煙センサ -->
+              <circle cx="200" cy="50" r="22" fill="#e53935"/>
+              <text x="200" y="48" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">煙</text>
+              <text x="200" y="60" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle">1.5%/m</text>
+              <line x1="185" y1="65" x2="155" y2="95" stroke="#e53935" stroke-width="2"/>
+
+              <!-- 電流監視 -->
+              <circle cx="120" cy="180" r="22" fill="#2e75b6"/>
+              <text x="120" y="178" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">電流</text>
+              <text x="120" y="190" font-family="Yu Gothic" font-size="9" fill="#fff" text-anchor="middle">130%</text>
+              <line x1="120" y1="158" x2="120" y2="130" stroke="#2e75b6" stroke-width="2"/>
+
+              <!-- 出力 主電源 -->
+              <rect x="80" y="155" width="80" height="20" rx="2" fill="#ffb74d"/>
+              <text x="120" y="169" font-family="Yu Gothic" font-size="9" fill="#0a1929" text-anchor="middle" font-weight="700">主電源リレー OFF</text>
+            </svg>
+          </div>
+          <div class="stage-detail">
+            <h4>仕組み</h4>
+            <p>圧縮室温度・煙・モータ電流の3系統を独立に監視。いずれか1つでも閾値を超えると、ハードワイヤード OR 論理によって主電源リレーが強制遮断されます。メイン基板 (ESP32-S3) のソフトウェアに依存しない構造のため、MCU 停止時も確実に動作します。</p>
+            <h4>具体仕様</h4>
+            <ul>
+              <li>K型熱電対 ×2: 圧縮室上下に配置, 80°C で警告/減速、120°C で緊急停止</li>
+              <li>光電式煙センサ: 排気ダクト直上, 感度 1.5%/m 遮光</li>
+              <li>シャント電流監視: モータ拘束検知, 定格の130%で遮断 (異物噛み込み)</li>
+              <li>HW OR論理: 任意1系統作動で主電源リレーをハードウェアレベルで遮断</li>
+              <li>通知: 遮断と同時に LTE-M 残電力でアプリへ異常通報送信</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Stage 4 -->
+      <article class="stage-card stage-4">
+        <header class="stage-card-header">
+          <div class="stage-num">4</div>
+          <div class="stage-title-wrap">
+            <h3>延焼させず、自然に鎮める</h3>
+            <p class="role">受動的封じ込めと延焼遮断 / Mitigation</p>
+          </div>
+          <span class="stage-badge">延焼遮断</span>
+        </header>
+        <div class="stage-body">
+          <div class="stage-illust">
+            <svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="延焼遮断とパッシブ排気">
+              <!-- 筐体 -->
+              <rect x="50" y="40" width="140" height="160" fill="#fff" stroke="#1f3864" stroke-width="2"/>
+              <!-- 圧縮室 -->
+              <rect x="60" y="50" width="120" height="60" fill="#ffeb3b" opacity="0.4"/>
+              <circle cx="120" cy="80" r="10" fill="#e53935"/>
+              <text x="120" y="84" font-family="Yu Gothic" font-size="8" fill="#fff" text-anchor="middle" font-weight="700">発火</text>
+              <!-- ブランケット -->
+              <rect x="60" y="115" width="120" height="6" fill="#ff7a1a"/>
+              <text x="120" y="138" font-family="Yu Gothic" font-size="8" fill="#ff7a1a" text-anchor="middle" font-weight="700">セラミック隔壁</text>
+              <!-- 残渣 -->
+              <rect x="60" y="145" width="80" height="50" fill="#e3f2fd"/>
+              <text x="100" y="175" font-family="Yu Gothic" font-size="9" fill="#1f3864" text-anchor="middle" font-weight="700">PET残渣</text>
+              <text x="100" y="188" font-family="Yu Gothic" font-size="8" fill="#2e7d32" text-anchor="middle">延焼遮断</text>
+              <!-- 廃液 -->
+              <line x1="140" y1="145" x2="140" y2="195" stroke="#e53935" stroke-width="1.5" stroke-dasharray="3,2"/>
+              <rect x="140" y="145" width="40" height="50" fill="#f5f7fa"/>
+              <text x="160" y="172" font-family="Yu Gothic" font-size="8" fill="#1f3864" text-anchor="middle" font-weight="700">廃液</text>
+              <text x="160" y="184" font-family="Yu Gothic" font-size="8" fill="#1f3864" text-anchor="middle">独立区画</text>
+              <!-- パッシブベント -->
+              <polygon points="100,40 140,40 120,20" fill="#ffb74d"/>
+              <text x="120" y="14" font-family="Yu Gothic" font-size="9" fill="#1f3864" text-anchor="middle" font-weight="700">↑排気</text>
+              <!-- 矢印 内圧 -->
+              <path d="M120,75 L120,30" stroke="#5a6a7a" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a4)"/>
+              <defs>
+                <marker id="a4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                  <polygon points="0,0 8,4 0,8" fill="#5a6a7a"/>
+                </marker>
+              </defs>
+            </svg>
+          </div>
+          <div class="stage-detail">
+            <h4>仕組み</h4>
+            <p>圧縮室と残渣カートリッジの間にセラミックブランケット隔壁を、廃液カートリッジには独立金属隔壁を配置。万一の発火時もPET残渣・廃液側への延焼を物理的に遮ります。内圧上昇分は背面上方のパッシブ圧力リリーフからラビリンス構造を経由して静かに排気され、投入口側に火炎が噴出する構造を作らせません。</p>
+            <h4>具体仕様</h4>
+            <ul>
+              <li>パッシブ圧力リリーフ: ラビリンス式ベント, 開口60 cm², 背面上方排気</li>
+              <li>セラミックブランケット隔壁 t=5 mm (耐熱1000°C): 残渣との間に配置</li>
+              <li>廃液独立区画: SPCC隔壁 t=2.0 mm でPET残渣区画と分離</li>
+              <li>排気フィルタ: SUSメッシュ + 活性炭で煙・有毒ガス吸着</li>
+              <li>自然鎮静: 酸素供給遮断 + 熱放散により約180秒で温度低下開始 (シミュレーション値)</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 工学的根拠 ===== -->
+<section class="section rationale-section">
+  <div class="container">
+    <span class="section-eyebrow">Engineering Rationale</span>
+    <h2 class="section-title">数字で説明できる、安全。</h2>
+    <p class="section-lead">「能動消火を載せない」という判断は、感覚ではなく物理計算に基づいています。Li-ion 1セルの熱暴走エネルギーと、当社の3層封じ込め構造の耐熱性能を比較した結果、構造的に貫通しないことが確認できました。</p>
+
+    <div class="rationale-grid">
+      <div class="rationale-card">
+        <h4><span class="num">11</span>kJ — 発火源の最大エネルギー</h4>
+        <p>18650形リチウムイオン1セル (3 Wh) の熱暴走時放出エネルギーは約11 kJ。圧縮室容積 (PET圧縮後) 8L 内に放出された場合の理論最高温度は約450°Cと算出されます。</p>
+      </div>
+      <div class="rationale-card">
+        <h4><span class="num">1500</span>°C — 構造の最終耐熱</h4>
+        <p>外側SPCC隔壁の溶融温度は1500°C。中間層のセラミックファイバ (1000°C) と内側SUS316L (350°C) を合わせた3層構造は、想定発火温度に対して十分なマージンを持ちます。</p>
+      </div>
+      <div class="rationale-card">
+        <h4><span class="num">180</span>秒 — 自然鎮静までの想定時間</h4>
+        <p>圧縮室を密閉した状態で酸素枯渇と熱放散が進むため、検知から自然鎮静開始まで約180秒。能動消火がなくても延焼条件は成立しません。</p>
+      </div>
+      <div class="rationale-card">
+        <h4><span class="num">3</span>系統 — 独立した防火検知</h4>
+        <p>熱電対・煙センサ・電流監視の3系統は完全に独立。各系統が故障してもバックアップとして機能し、HW OR論理で主電源を強制遮断します。</p>
+      </div>
+    </div>
+
+    <h3 class="block-title" style="margin-top:48px;">主な防火部材の仕様</h3>
+    <table class="spec-table">
+      <thead>
+        <tr><th style="width:24%">部材</th><th>仕様</th><th style="width:18%">耐熱性能</th><th style="width:18%">役割</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>圧縮室ライナ</td><td>SUS316L t=2.0 mm, レーザー溶接</td><td class="accent">350°C</td><td>一次封じ込め</td></tr>
+        <tr><td>断熱層</td><td>セラミックファイバ t=6 mm, 熱伝導率0.06 W/m·K</td><td class="accent">1000°C</td><td>熱伝播抑止</td></tr>
+        <tr><td>外側隔壁</td><td>SPCC t=2.0 mm + 防火塗装</td><td class="accent">1500°C (溶融)</td><td>二次封じ込め</td></tr>
+        <tr><td>残渣ライナ</td><td>SUS網 #20 + 防火塗装</td><td class="accent">800°C</td><td>カートリッジ防護</td></tr>
+        <tr><td>隔壁ブランケット</td><td>セラミックブランケット t=5 mm</td><td class="accent">1000°C</td><td>延焼遮断</td></tr>
+        <tr><td>パッシブベント</td><td>ラビリンス式, 開口60 cm² (背面上方)</td><td>—</td><td>内圧逃がし</td></tr>
+        <tr><td>排気フィルタ</td><td>SUSメッシュ + 活性炭</td><td class="accent">600°C</td><td>煙・有害ガス吸着</td></tr>
+        <tr><td>ガスケット</td><td>シリコン難燃 UL94 V-0</td><td class="accent">200°C連続</td><td>気密 + 高温耐性</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="container">
+    <h2>つぶすくんの安全設計、もっと詳しく</h2>
+    <p>本ページでご紹介した4段防護の詳細仕様、シミュレーション根拠、認証取得状況をまとめた技術資料 (PDF) をご用意しています。導入検討中の自治体様・事業者様には個別説明会も承ります。</p>
+    <a href="/contact/" class="cta-button">技術資料を請求する →</a>
+  </div>
+</section>
+</div>

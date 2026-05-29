@@ -145,7 +145,36 @@ permalink: /products/lite/
   .bl-cta{padding:36px 22px;}
   .bl-hero{padding:52px 22px 64px;}
 }
+
+/* 製品ページ間サブメニュー */
+.bl-subnav{
+  display:flex;flex-wrap:wrap;gap:8px;
+  padding:14px 18px;margin:0 0 24px;
+  background:#f5f7fa;border:1px solid #e0e6ec;border-radius:12px;
+  font-size:13px;
+}
+.bl-subnav-label{
+  color:#5a6a7a;font-weight:600;letter-spacing:.05em;
+  padding:6px 4px;margin-right:4px;
+}
+.bl-subnav a{
+  display:inline-block;padding:6px 14px;border-radius:999px;
+  background:#fff;color:#0B5FFF;border:1px solid #e0e6ec;
+  text-decoration:none;font-weight:600;transition:all .2s;
+}
+.bl-subnav a:hover{background:#0B5FFF;color:#fff;border-color:#0B5FFF;}
+.bl-subnav a.is-current{background:#0B5FFF;color:#fff;border-color:#0B5FFF;cursor:default;}
+@media (max-width:480px){
+  .bl-subnav{font-size:12px;padding:12px;}
+  .bl-subnav-label{width:100%;margin:0 0 4px;}
+}
 </style>
+
+<nav class="bl-subnav" aria-label="製品メニュー">
+  <span class="bl-subnav-label">製品</span>
+  <a href="{{ '/products/lite/' | relative_url }}" class="is-current" aria-current="page">Boxernet Lite</a>
+  <a href="{{ '/products/tsubusukun/safety/' | relative_url }}">つぶすくん Standard 安全設計</a>
+</nav>
 
 <section class="bl-hero">
   <div class="bl-hero-inner">
@@ -357,4 +386,7 @@ permalink: /products/lite/
   <a href="mailto:info@pickup-st.com?subject=Boxernet%20Lite%20%E8%B3%87%E6%96%99%E8%AB%8B%E6%B1%82" class="bl-cta-btn">
     info@pickup-st.com に問い合わせる
   </a>
+  <p style="margin-top:24px;font-size:.95em;">
+    <a href="{{ '/products/tsubusukun/safety/' | relative_url }}">つぶすくん Standard の安全設計 →</a>
+  </p>
 </section>

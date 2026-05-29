@@ -539,4 +539,7 @@ permalink: /insights/recycle-overflow/
   </p>
   <a href="{{ '/business/' | relative_url }}" class="ro-cta-btn">事業内容を見る</a>
   <a href="{{ '/contact/' | relative_url }}" class="ro-cta-btn ro-cta-btn-outline">お問い合わせ</a>
+  <p style="margin-top:24px;font-size:.95em;">
+    <a href="{{ '/products/tsubusukun/safety/' | relative_url }}" style="color:#fff;text-decoration:underline;">Li-ion 混入対策の設計思想 →</a>
+  </p>
 </section>
