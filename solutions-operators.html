@@ -1,0 +1,268 @@
+---
+layout: default
+title: つぶすくん×自販機クラウド｜「売る」から「回収する」までのトータルソリューション
+description: Vendy・Coke ONなどの自販機クラウドが実現した販売DXに、つぶすくんが回収DXを加える。圧縮で回収頻度を約1/3に削減、LTE-M満杯通知で溢れゼロ。補充と回収を1ルートに統合するトータルソリューション。
+permalink: /solutions/operators/
+---
+
+<style>
+/* =========================================================
+   オペレーター向けソリューションページ専用スタイル
+   既存 site CSS と干渉しないよう、クラス名は全て "op-" プレフィックス
+   ========================================================= */
+.op-hero{
+  background:linear-gradient(135deg,#0a1430 0%,#10306e 60%,#0B5FFF 100%);
+  color:#fff;padding:72px 28px 84px;border-radius:18px;
+  position:relative;overflow:hidden;margin-bottom:48px;
+}
+.op-hero::after{
+  content:"";position:absolute;right:-120px;top:-120px;width:560px;height:560px;
+  background:radial-gradient(circle,rgba(0,198,169,.28),transparent 65%);pointer-events:none;
+}
+.op-hero-inner{position:relative;z-index:2;max-width:900px;}
+.op-badge{
+  display:inline-block;font-size:11px;letter-spacing:.18em;
+  background:rgba(0,198,169,.16);color:#7ff0db;border:1px solid rgba(0,198,169,.45);
+  padding:6px 14px;border-radius:999px;font-weight:700;margin-bottom:20px;
+}
+.op-hero h2{font-size:clamp(24px,4vw,40px);font-weight:800;line-height:1.35;margin:0 0 18px;color:#fff;}
+.op-hero h2 em{font-style:normal;color:#00C6A9;}
+.op-hero p.op-lead{font-size:clamp(14px,1.6vw,16.5px);color:#cfd8ee;line-height:1.8;}
+.op-hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px;max-width:760px;}
+.op-hstat{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:16px;}
+.op-hstat b{display:block;font-size:26px;font-weight:800;color:#00C6A9;line-height:1.1;}
+.op-hstat span{font-size:12px;color:#cfd8ee;}
+
+.op-section{margin:64px 0;}
+.op-eyebrow{font-size:11px;letter-spacing:.22em;color:#0B5FFF;font-weight:700;text-transform:uppercase;margin-bottom:8px;}
+.op-section h3{font-size:clamp(20px,2.6vw,28px);font-weight:800;color:#0a1430;line-height:1.35;margin:0 0 12px;}
+.op-section p.op-slead{font-size:15px;color:#3a4868;max-width:820px;margin:0 0 32px;}
+
+.op-gap{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+.op-gap-card{border-radius:14px;padding:28px 26px;border:1px solid #e5ebf5;}
+.op-gap-card.op-done{background:#f5f8ff;}
+.op-gap-card.op-todo{background:#fff7f5;border-color:#ffd9cf;}
+.op-gap-card h4{font-size:17px;font-weight:800;margin:0 0 12px;color:#0a1430;}
+.op-gap-card.op-done h4::before{content:"✓ ";color:#00C6A9;}
+.op-gap-card.op-todo h4::before{content:"！ ";color:#e05a3a;}
+.op-gap-card ul{list-style:none;margin:0;padding:0;}
+.op-gap-card li{font-size:13.5px;color:#3a4868;padding:7px 0;border-bottom:1px dashed #e5ebf5;}
+.op-note{margin-top:16px;font-size:12.5px;color:#8a96ad;}
+
+.op-issues{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.op-issue{background:#fff;border:1px solid #e5ebf5;border-radius:12px;padding:24px 22px;box-shadow:0 8px 24px rgba(11,95,255,.05);}
+.op-issue .op-num{font-size:11px;letter-spacing:.2em;color:#0B5FFF;font-weight:700;}
+.op-issue h4{font-size:16px;font-weight:800;color:#0a1430;margin:6px 0 10px;}
+.op-issue p{font-size:13.5px;color:#3a4868;margin:0;}
+.op-metric{display:inline-block;margin-top:12px;background:#f5f8ff;color:#0B5FFF;font-weight:700;font-size:12px;padding:6px 12px;border-radius:6px;}
+
+.op-sols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.op-sol{border:1px solid #e5ebf5;border-radius:14px;padding:26px 24px;background:linear-gradient(180deg,#fff,#f5f8ff);}
+.op-sol .op-ico{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#0B5FFF,#00C6A9);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;margin-bottom:14px;}
+.op-sol h4{font-size:16.5px;font-weight:800;color:#0a1430;margin:0 0 10px;}
+.op-sol p{font-size:13.5px;color:#3a4868;margin:0;}
+.op-sol b.op-kpi{display:block;margin-top:14px;font-size:19px;color:#0B5FFF;font-weight:800;}
+
+.op-flow{background:#0a1430;color:#fff;border-radius:18px;padding:48px 32px;}
+.op-flow h3{color:#fff;}
+.op-flow p.op-slead{color:#cfd8ee;}
+.op-flow-box{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-top:36px;}
+.op-fnode{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:24px;}
+.op-fnode h4{font-size:14.5px;color:#00C6A9;letter-spacing:.06em;margin:0 0 12px;}
+.op-fnode ul{list-style:none;margin:0;padding:0;}
+.op-fnode li{font-size:13px;color:#dbe4f5;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.14);}
+.op-farrow{display:flex;align-items:center;justify-content:center;font-size:28px;color:#00C6A9;font-weight:800;}
+.op-funder{margin-top:24px;background:linear-gradient(135deg,#0B5FFF,#00C6A9);border-radius:14px;padding:22px 26px;text-align:center;font-size:14.5px;font-weight:700;}
+
+.op-table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(11,95,255,.06);}
+.op-table th,.op-table td{padding:12px 15px;text-align:left;font-size:13.5px;border-bottom:1px solid #e5ebf5;}
+.op-table th{background:#f5f8ff;color:#0a1430;font-weight:700;}
+.op-table th.op-hl{background:#0B5FFF;color:#fff;}
+.op-table td.op-hl{background:rgba(11,95,255,.05);color:#0B5FFF;font-weight:700;}
+
+.op-cta{background:linear-gradient(135deg,#0B5FFF,#00C6A9);color:#fff;border-radius:18px;padding:48px 32px;text-align:center;margin-top:48px;}
+.op-cta h3{font-size:24px;margin:0 0 12px;font-weight:800;color:#fff;}
+.op-cta p{font-size:14px;margin:0 auto 24px;max-width:720px;opacity:.94;}
+.op-cta a.op-btn{display:inline-block;background:#fff;color:#0B5FFF;padding:14px 32px;border-radius:10px;font-weight:800;font-size:14.5px;text-decoration:none;}
+.op-cta a.op-btn:hover{background:#f5f8ff;}
+.op-cta .op-sub{margin-top:18px;font-size:13px;}
+.op-cta .op-sub a{color:#fff;text-decoration:underline;}
+.op-disclaimer{font-size:11.5px;color:#8a96ad;margin-top:42px;border-top:1px solid #e5ebf5;padding-top:16px;line-height:1.8;}
+
+@media (max-width:768px){
+  .op-gap,.op-issues,.op-sols,.op-hero-stats{grid-template-columns:1fr;}
+  .op-flow-box{grid-template-columns:1fr;}
+  .op-farrow{transform:rotate(90deg);padding:2px 0;}
+  .op-hero{padding:52px 22px 64px;}
+  .op-table th,.op-table td{padding:10px;font-size:12.5px;}
+}
+</style>
+
+<section class="op-hero">
+  <div class="op-hero-inner">
+    <span class="op-badge">FOR VENDING MACHINE OPERATORS &amp; CLOUD PARTNERS</span>
+    <h2>「売る」のDXは、進んだ。<br>次は<em>「回収する」</em>のDXです。</h2>
+    <p class="op-lead">
+      VendyやCoke ONに代表される自販機クラウドは、キャッシュレス決済・在庫の遠隔把握・補充ルート最適化を実現しました。
+      しかし自販機の横では、いまもリサイクルボックスが溢れています。
+      つぶすくんは「圧縮×遠隔監視×API連携」で、販売から空容器回収までをひとつのオペレーションに統合するトータルソリューションです。
+    </p>
+    <div class="op-hero-stats">
+      <div class="op-hstat"><b>約1/3</b><span>圧縮による減容で、回収頻度を大幅削減</span></div>
+      <div class="op-hstat"><b>溢れゼロへ</b><span>LTE-M満杯通知で、満杯放置と空振り巡回を解消</span></div>
+      <div class="op-hstat"><b>1ルート</b><span>API連携で「補充」と「回収」を同一巡回に統合</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="op-section">
+  <div class="op-eyebrow">The Missing Half</div>
+  <h3>自販機DXに残された、最後のピース。</h3>
+  <p class="op-slead">自販機クラウドが解決したのは「商品が売れるまで」。売れた後に発生する空き缶・ペットボトルの回収は、いまもデータの空白地帯です。</p>
+  <div class="op-gap">
+    <div class="op-gap-card op-done">
+      <h4>自販機クラウドが解決したこと（販売DX）</h4>
+      <ul>
+        <li>・キャッシュレス決済・ポイント連携による購買体験の向上</li>
+        <li>・売上・在庫のリアルタイム遠隔把握</li>
+        <li>・欠品予測にもとづく補充ルートの最適化</li>
+        <li>・消費電力・稼働状態の遠隔管理</li>
+      </ul>
+    </div>
+    <div class="op-gap-card op-todo">
+      <h4>まだ解決されていないこと（回収の現場）</h4>
+      <ul>
+        <li>・リサイクルボックスの満杯・溢れが見えない</li>
+        <li>・溢れたボックスは「ただのゴミ箱」化し、異物混入が連鎖</li>
+        <li>・回収は固定ルートのまま。空振りと取りこぼしが常態化</li>
+        <li>・未圧縮のボトルはかさばり、車両の積載効率が上がらない</li>
+      </ul>
+    </div>
+  </div>
+  <p class="op-note">※環境省実証事業（2022年）では、自販機横リサイクルボックスの回収物の約30%に飲料容器以外の異物が混入。</p>
+</section>
+
+<section class="op-section">
+  <div class="op-eyebrow">Operator's Pain</div>
+  <h3>回収の非効率は、そのままコストです。</h3>
+  <p class="op-slead">自販機オペレーターにとって、空容器回収は売上を生まない作業時間。それでも品質と景観を守るために、巡回を減らせないのが現実です。</p>
+  <div class="op-issues">
+    <div class="op-issue">
+      <div class="op-num">ISSUE 01</div>
+      <h4>見えないから、空振りする</h4>
+      <p>満杯かどうかは行ってみないと分からない。空のボックスへの巡回も、満杯放置も、どちらもコストです。</p>
+      <span class="op-metric">巡回の空振り＝無駄な人件費・燃料費</span>
+    </div>
+    <div class="op-issue">
+      <div class="op-num">ISSUE 02</div>
+      <h4>溢れると、悪循環が始まる</h4>
+      <p>溢れたボックスには異物投入が連鎖し、リサイクル品質を毀損。設置先からのクレームはブランド毀損に直結します。</p>
+      <span class="op-metric">異物混入 約30%（環境省 2022年）</span>
+    </div>
+    <div class="op-issue">
+      <div class="op-num">ISSUE 03</div>
+      <h4>かさばるから、運べない</h4>
+      <p>未圧縮のペットボトルは空気を運んでいるのと同じ。車両の積載効率が上がらず、回収頻度も下げられません。</p>
+      <span class="op-metric">未圧縮ボトル＝積載効率のボトルネック</span>
+    </div>
+  </div>
+</section>
+
+<section class="op-section">
+  <div class="op-eyebrow">Solution</div>
+  <h3>つぶすくんが、回収を「売る」と同じ精度に。</h3>
+  <p class="op-slead">自販機の横に置くだけ。投入されたペットボトルをその場で圧縮し、満杯になったらクラウドへ知らせる。回収のオペレーションが、初めてデータドリブンになります。</p>
+  <div class="op-sols">
+    <div class="op-sol">
+      <div class="op-ico">1/3</div>
+      <h4>圧縮で、回収頻度を削減</h4>
+      <p>圧縮力1.2kN（実効ピーク2kN相当）で容積を約3分の1に減容。同じスペースで約3倍のボトルを収容でき、回収サイクルは約7日（Lite・約130本収容時）まで延伸します。</p>
+      <b class="op-kpi">回収頻度 最大▲2/3</b>
+    </div>
+    <div class="op-sol">
+      <div class="op-ico">IoT</div>
+      <h4>満杯通知で、溢れゼロへ</h4>
+      <p>LTE-M（Cat.M1）＋GNSS内蔵。満杯・稼働状態・位置情報をクラウドへ自動送信し、「満杯になった機体だけ」を回収。空振り巡回と満杯放置を同時に解消します。</p>
+      <b class="op-kpi">空振り巡回 ゼロへ</b>
+    </div>
+    <div class="op-sol">
+      <div class="op-ico">API</div>
+      <h4>API連携で、ルートを統合</h4>
+      <p>満杯状況・投入本数・稼働データをOPEN APIで提供。自販機クラウドの補充ルート最適化に回収データを連携し、1回の巡回で「補充」と「回収」を同時に完了します。</p>
+      <b class="op-kpi">補充＋回収を1ルートに</b>
+    </div>
+  </div>
+</section>
+
+<section class="op-section op-flow">
+  <div class="op-eyebrow" style="color:#00C6A9;">Total Solution</div>
+  <h3>「売るデータ」と「回収データ」を、ひとつに。</h3>
+  <p class="op-slead">自販機クラウドの販売・在庫データと、つぶすくんの満杯・投入データを重ねれば、補充と回収は同じ地図の上で最適化できます。</p>
+  <div class="op-flow-box">
+    <div class="op-fnode">
+      <h4>自販機クラウド（Vendy / Coke ON 等）</h4>
+      <ul>
+        <li>売上・在庫データ</li>
+        <li>欠品予測・補充計画</li>
+        <li>決済・会員データ</li>
+      </ul>
+    </div>
+    <div class="op-farrow">⇄</div>
+    <div class="op-fnode">
+      <h4>つぶすくん（状態遷移検知プラットフォーム）</h4>
+      <ul>
+        <li>満杯状況・投入本数</li>
+        <li>稼働状態・位置情報（GNSS）</li>
+        <li>火災通報などの安全アラート</li>
+      </ul>
+    </div>
+  </div>
+  <div class="op-funder">統合ルート最適化 ── 1回の巡回で「補充」も「回収」も完了。走行距離・人件費・CO2を同時に削減。</div>
+</section>
+
+<section class="op-section">
+  <div class="op-eyebrow">Before → After</div>
+  <h3>オペレーションは、こう変わる。</h3>
+  <table class="op-table">
+    <thead>
+      <tr><th>項目</th><th>従来のリサイクルボックス</th><th class="op-hl">つぶすくん導入後</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>満杯の把握</td><td>行ってみないと分からない</td><td class="op-hl">LTE-Mで自動通知（遠隔把握）</td></tr>
+      <tr><td>回収タイミング</td><td>固定ルート・定期巡回</td><td class="op-hl">満杯になった機体だけを回収</td></tr>
+      <tr><td>容積</td><td>未圧縮のまま</td><td class="op-hl">約1/3に圧縮、収容数 約3倍</td></tr>
+      <tr><td>溢れ・異物混入</td><td>溢れ→異物連鎖（約30%混入）</td><td class="op-hl">密閉投入口＋溢れ前回収で品質確保</td></tr>
+      <tr><td>補充との関係</td><td>別オペレーション</td><td class="op-hl">API連携で補充と同一巡回に統合</td></tr>
+      <tr><td>安全性</td><td>火災リスクは無防備</td><td class="op-hl">4段防護＋火災時はLTE-Mで即時通報</td></tr>
+    </tbody>
+  </table>
+  <p class="op-note">リチウムイオン電池混入対策など、つぶすくんの防火・安全設計の詳細は<a href="{{ '/products/tsubusukun/safety/' | relative_url }}">「安全への取り組み」</a>をご覧ください。</p>
+</section>
+
+<section class="op-section">
+  <div class="op-eyebrow">Lineup</div>
+  <h3>設置場所の規模に合わせて選べる2機種。</h3>
+  <table class="op-table">
+    <thead>
+      <tr><th>項目</th><th class="op-hl">つぶすくんLite（TSB-P1L）</th><th>つぶすくん Standard</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>位置づけ</td><td class="op-hl">小型・低価格の普及機</td><td>大型拠点向け上位機</td></tr>
+      <tr><td>収容能力 / 回収周期</td><td class="op-hl">約130本 / 約7日</td><td>約170本 / 約10日</td></tr>
+      <tr><td>本体価格</td><td class="op-hl">228,000円（税抜・予定）</td><td>個別見積</td></tr>
+      <tr><td>おすすめの設置場所</td><td class="op-hl">街角・中小規模施設・オフィスの自販機横</td><td>スタジアム・大型商業施設</td></tr>
+    </tbody>
+  </table>
+  <p class="op-note">※LTE-M遠隔監視サービスは別途継続課金（詳細は発表予定）。防火安全機構・遠隔監視は両機種とも標準装備。</p>
+</section>
+
+<section class="op-cta">
+  <h3>「売った場所で、回収する」を、一緒に。</h3>
+  <p>2027年2月の発売に先立ち、自販機クラウド事業者さま・自販機オペレーターさまとの提携・実証実験のご相談を受け付けています。回収データのAPI仕様、導入効果の試算資料もご提供可能です。</p>
+  <a class="op-btn" href="mailto:info@pickup-st.com?subject=%E3%81%A4%E3%81%B6%E3%81%99%E3%81%8F%E3%82%93%20%E6%8F%90%E6%90%BA%E3%83%BB%E5%B0%8E%E5%85%A5%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">info@pickup-st.com に相談する</a>
+  <p class="op-sub"><a href="{{ '/products/tsubusukun/safety/' | relative_url }}">つぶすくんの安全設計を見る →</a></p>
+</section>
+
+<p class="op-disclaimer">
+  ※「Vendy」はソフトバンク株式会社、「Coke ON」は日本コカ・コーラ株式会社が提供するサービスです。本ページの記載は当社が目指す連携構想であり、特定事業者との提携が成立していることを示すものではありません。API仕様は発売までに公開予定です。記載の数値は設計値・実証値にもとづく見込みであり、実環境により異なる場合があります。
+</p>
