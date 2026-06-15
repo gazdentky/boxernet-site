@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Boxernet Lite｜TinyML 搭載スマートリサイクルボックス
-description: Boxernet Lite は通信レス・TinyML 搭載のマンション設置型スマートゴミ箱。ESP32-S3 とエッジ AI で分別判定・満杯予測・異常検知をデバイス単体で完結。クラウド費 0 円、管理コスト 35% 削減。
+title: 集合住宅Lite｜TinyML 搭載スマートリサイクルボックス
+description: 集合住宅Lite は通信レス・TinyML 搭載のマンション設置型スマートゴミ箱。ESP32-S3 とエッジ AI で分別判定・満杯予測・異常検知をデバイス単体で完結。クラウド費 0 円、管理コスト 35% 削減。
 permalink: /products/lite/
 ---
 
 <style>
 /* =========================================================
-   Boxernet Lite ページ専用スタイル
+   集合住宅Lite ページ専用スタイル
    既存 site CSS と干渉しないよう、クラス名は全て "bl-" プレフィックス
    ========================================================= */
 .bl-hero{
@@ -172,14 +172,14 @@ permalink: /products/lite/
 
 <nav class="bl-subnav" aria-label="製品メニュー">
   <span class="bl-subnav-label">製品</span>
-  <a href="{{ '/products/lite/' | relative_url }}" class="is-current" aria-current="page">Boxernet Lite</a>
+  <a href="{{ '/products/lite/' | relative_url }}" class="is-current" aria-current="page">集合住宅Lite</a>
   <a href="{{ '/products/tsubusukun/safety/' | relative_url }}">つぶすくん Standard 安全設計</a>
 </nav>
 
 <section class="bl-hero">
   <div class="bl-hero-inner">
     <span class="bl-edition">No Cloud · No Cellular · No Wi-Fi Edition</span>
-    <h2>Boxernet Lite<br><em>通信レス・TinyML</em><br>スマートリサイクルボックス</h2>
+    <h2>集合住宅Lite<br><em>通信レス・TinyML</em><br>スマートリサイクルボックス</h2>
     <p class="bl-lead">
       マンション分譲・賃貸運営のために設計された、エッジ AI 単体で完結するスマートゴミ箱。
       ESP32-S3 上の TinyML が「分別判定」「満杯予測」「異常検知」をデバイス内で処理。
@@ -206,7 +206,7 @@ permalink: /products/lite/
   <div class="bl-eyebrow">Background</div>
   <h3>なぜ「通信レス」が求められるのか</h3>
   <p class="bl-section-lead">
-    マンション共用部のごみステーション運営には、頻度ミスマッチ・分別品質・導入ハードルという 3 つの構造課題があります。Boxernet Lite はこれらを通信を使わずに解決します。
+    マンション共用部のごみステーション運営には、頻度ミスマッチ・分別品質・導入ハードルという 3 つの構造課題があります。集合住宅Lite はこれらを通信を使わずに解決します。
   </p>
   <div class="bl-issues">
     <div class="bl-issue">
@@ -281,7 +281,7 @@ permalink: /products/lite/
       <tr>
         <th>項目</th>
         <th>Boxernet Standard</th>
-        <th class="bl-hl">Boxernet Lite</th>
+        <th class="bl-hl">集合住宅Lite</th>
       </tr>
     </thead>
     <tbody>
@@ -381,9 +381,9 @@ permalink: /products/lite/
 </section>
 
 <section class="bl-cta">
-  <h3>Boxernet Lite の導入をご検討中の方へ</h3>
+  <h3>集合住宅Lite の導入をご検討中の方へ</h3>
   <p>マンション共用部・PM 業務の改善ポテンシャルを試算します。資料・デモ動画もご提供可能です。</p>
-  <a href="mailto:info@pickup-st.com?subject=Boxernet%20Lite%20%E8%B3%87%E6%96%99%E8%AB%8B%E6%B1%82" class="bl-cta-btn">
+  <a href="mailto:info@pickup-st.com?subject=%E9%9B%86%E5%90%88%E4%BD%8F%E5%AE%85Lite%20%E8%B3%87%E6%96%99%E8%AB%8B%E6%B1%82" class="bl-cta-btn">
     info@pickup-st.com に問い合わせる
   </a>
   <p style="margin-top:24px;font-size:.95em;">

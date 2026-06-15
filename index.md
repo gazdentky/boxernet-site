@@ -20,7 +20,7 @@ keywords: IoT,スマートリサイクルボックス,ペットボトル回収,�
 <div class="card-grid">
   <div class="card">
     <h3>つぶすくん</h3>
-    <p>PET専用スマートリサイクルボックス。自動販売機横に設置し、蓄積状態を各種センサーとアルゴリズムで遠隔検知します。</p>
+    <p>PET専用スマートリサイクルボックス。自動販売機横に設置し、蓄積状態を各種センサーとアルゴリズムで遠隔検知します。<br><a href="{{ '/solutions/operators/' | relative_url }}"><strong>自販機オペレーター向けトータルソリューション →</strong></a></p>
   </div>
   <div class="card">
     <h3>ピックアップステーション</h3>
