@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: 'ja' }}">
+<html lang="{{ page.lang | default: site.lang | default: 'ja' }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,20 +20,42 @@
 </head>
 <body>
 
+{% comment %} 言語に応じてナビ・ロゴ遷移先・トグルリンクを切替 {% endcomment %}
+{% if page.lang == 'en' %}
+  {% assign navlist = site.nav_en %}
+  {% assign home_url = '/en/' %}
+  {% assign toggle_url = page.alt_url | default: '/' %}
+{% else %}
+  {% assign navlist = site.nav %}
+  {% assign home_url = '/' %}
+  {% assign toggle_url = page.alt_url | default: '/en/' %}
+{% endif %}
+
 <header class="site-header">
   <div class="container header-inner">
-    <a href="{{ '/' | relative_url }}" class="site-logo">{{ site.title }}</a>
-    <nav class="site-nav">
-      <input type="checkbox" id="nav-toggle" class="nav-toggle">
-      <label for="nav-toggle" class="nav-toggle-label" aria-label="メニュー">
-        <span></span><span></span><span></span>
-      </label>
-      <ul>
-        {% for item in site.nav %}
-          <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </nav>
+    <a href="{{ home_url | relative_url }}" class="site-logo">{{ site.title }}</a>
+    <div class="header-right">
+      <div class="lang-switch" role="group" aria-label="Language">
+        {% if page.lang == 'en' %}
+          <a class="lang-opt" href="{{ toggle_url | relative_url }}" hreflang="ja">日本語</a>
+          <span class="lang-opt is-active" aria-current="true">EN</span>
+        {% else %}
+          <span class="lang-opt is-active" aria-current="true">日本語</span>
+          <a class="lang-opt" href="{{ toggle_url | relative_url }}" hreflang="en">EN</a>
+        {% endif %}
+      </div>
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+        <label for="nav-toggle" class="nav-toggle-label" aria-label="メニュー">
+          <span></span><span></span><span></span>
+        </label>
+        <ul>
+          {% for item in navlist %}
+            <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -55,12 +77,12 @@
 <footer class="site-footer">
   <div class="container footer-grid">
     <div>
-      <div class="footer-logo">{{ site.company.name }}</div>
-      <div class="footer-address">{{ site.company.address }}</div>
+      <div class="footer-logo">{% if page.lang == 'en' %}{{ site.company.name_en }}{% else %}{{ site.company.name }}{% endif %}</div>
+      <div class="footer-address">{% if page.lang == 'en' %}{{ site.company.address_en | default: site.company.address }}{% else %}{{ site.company.address }}{% endif %}</div>
     </div>
     <div>
       <ul class="footer-links">
-        {% for item in site.nav %}
+        {% for item in navlist %}
           <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
         {% endfor %}
       </ul>

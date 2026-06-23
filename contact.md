@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: ja
+alt_url: /en/contact/
 title: お問い合わせ | 株式会社Boxernet
 heading: お問い合わせ
 description: 株式会社Boxernet へのお問い合わせ・取材依頼・パートナーシップのご相談はこちらから。スマートリサイクルボックス「つぶすくん」やピックアップステーション導入のご相談も受け付けています。

@@ -33,6 +33,7 @@ company:
   capital: 310万円
   ceo: 高橋 明宏
   address: 東京都豊島区
+  address_en: Toshima-ku, Tokyo, Japan
   patent_number: "第7534835号"
   email: info@pickup-st.com
 
@@ -63,6 +64,17 @@ nav:
   - title: お問い合わせ
     url: /contact/
 
+# ナビゲーション（英語ページ用）
+nav_en:
+  - title: HOME
+    url: /en/
+  - title: Business
+    url: /en/business/
+  - title: Company
+    url: /en/company/
+  - title: Contact
+    url: /en/contact/
+
 # ビルド設定
 markdown: kramdown
 highlighter: rouge
@@ -85,3 +97,10 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
+
+# サイトマップ・SEO の個別設定（投資家向けゲート裏PDFを除外）
+defaults:
+  - scope:
+      path: "assets/pdf/boxernet-pitch-deck.pdf"
+    values:
+      sitemap: false

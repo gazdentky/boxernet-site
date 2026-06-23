@@ -1,5 +1,7 @@
 ---
 layout: default
+lang: ja
+alt_url: /en/business/
 title: 事業内容 | 株式会社Boxernet
 heading: 事業内容
 description: Boxernetの事業内容。つぶすくん、ピックアップステーション、状態遷移検知プラットフォームをご紹介します。

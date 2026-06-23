@@ -76,6 +76,40 @@ a:hover { text-decoration: underline; }
 
 .nav-toggle, .nav-toggle-label { display: none; }
 
+/* ============ 言語トグル（JP / EN 切替） ============ */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.lang-switch {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.lang-switch .lang-opt {
+  padding: 5px 12px;
+  color: var(--color-text-sub);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  background: #fff;
+  transition: background 0.15s, color 0.15s;
+}
+.lang-switch a.lang-opt:hover {
+  background: var(--color-bg-alt);
+  color: var(--color-primary);
+  text-decoration: none;
+}
+.lang-switch .is-active {
+  background: var(--color-primary);
+  color: #fff;
+}
+
 /* ============ Page Hero ============ */
 .page-hero {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
@@ -286,6 +320,8 @@ a:hover { text-decoration: underline; }
   .page-content { padding: 48px 24px; }
   .page-content h1 { font-size: 26px; }
   .page-content h2 { font-size: 20px; }
+
+  .header-right { gap: 14px; }
 
   .nav-toggle-label {
     display: flex;
