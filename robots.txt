@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
 
+# 投資家向けゲート裏PDF (フォーム経由のみ配布)
+Disallow: /assets/pdf/boxernet-pitch-deck.pdf
+
 Sitemap: https://pickup-st.com/sitemap.xml

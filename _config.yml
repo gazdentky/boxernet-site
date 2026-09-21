@@ -49,7 +49,9 @@ nav:
     url: /
   - title: 事業内容
     url: /business/
-  - title: 製品
+  - title: つぶすくん
+    url: /products/tsubusukun/
+  - title: 集合住宅Lite
     url: /products/lite/
   - title: デモ
     url: /demo/
@@ -97,6 +99,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-feed
+  - jekyll-redirect-from
 
 # サイトマップ・SEO の個別設定（投資家向けゲート裏PDFを除外）
 defaults:
